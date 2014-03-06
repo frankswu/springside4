@@ -19,3 +19,4 @@ create table ss_user (
 	register_date timestamp not null,
 	primary key (id)
 );
+
