@@ -3,6 +3,7 @@ package org.springside.examples.quickstart.web.task;
 import java.util.Map;
 
 import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.shiro.SecurityUtils;
@@ -10,11 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springside.examples.quickstart.entity.Task;
 import org.springside.examples.quickstart.entity.User;
@@ -27,11 +30,12 @@ import com.google.common.collect.Maps;
 /**
  * Task管理的Controller, 使用Restful风格的Urls:
  * 
- * List page : GET /task/
- * Create page : GET /task/create
- * Create action : POST /task/create
- * Update page : GET /task/update/{id}
- * Update action : POST /task/update
+ * <br>
+ * List page : GET /task/ <br>
+ * Create page : GET /task/create <br>
+ * Create action : POST /task/create <br>
+ * Update page : GET /task/update/{id} <br>
+ * Update action : POST /task/update <br>
  * Delete action : GET /task/delete/{id}
  * 
  * @author calvin
@@ -72,13 +76,16 @@ public class TaskController {
 
 	@RequestMapping(value = "create", method = RequestMethod.GET)
 	public String createForm(Model model) {
-		model.addAttribute("task", new Task());
+		Task task = new Task();
+		task.setId(0L);
+		model.addAttribute("task", task);
 		model.addAttribute("action", "create");
 		return "task/taskForm";
 	}
 
 	@RequestMapping(value = "create", method = RequestMethod.POST)
 	public String create(@Valid Task newTask, RedirectAttributes redirectAttributes) {
+		System.out.println("saveTask");
 		User user = new User(getCurrentUserId());
 		newTask.setUser(user);
 
@@ -125,5 +132,18 @@ public class TaskController {
 	private Long getCurrentUserId() {
 		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
 		return user.id;
+	}
+
+	// Total control - setup a model and return the view name yourself. Or consider
+	// subclassing ExceptionHandlerExceptionResolver (see below).
+	@ExceptionHandler(Exception.class)
+	public ModelAndView handleError(HttpServletRequest req, Exception exception) {
+		System.out.println("Request: " + req.getRequestURL() + ",method:" + req.getMethod() + ",raised " + exception);
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("exception", exception);
+		mav.addObject("url", req.getRequestURL());
+		mav.setViewName("error");
+		return mav;
 	}
 }
