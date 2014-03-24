@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "role_tb")
-public class TRole extends IdEntity {
+public class TMRole extends IdEntity {
 
 	private String roleName;
 	private String permissions;

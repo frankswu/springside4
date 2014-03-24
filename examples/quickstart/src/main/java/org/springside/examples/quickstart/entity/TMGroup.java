@@ -5,7 +5,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "group_tb")
-public class TGroup extends IdEntity {
+public class TMGroup extends IdEntity {
 
 	private String groupName;
 	private String groupDesc;

@@ -24,24 +24,26 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 @Entity
-@Table(name = "user_tb")
-public class TUser extends IdEntity {
+@Table(name = "base_user_tb")
+public class TMBaseUser extends IdEntity {
 
-	private String loginName;
+	private String account;
 	private String name;
 	private String password;
+	// private int role;// 角色 位运算 0代表普通球友 1代表教练
 	private String roles;
+	// private String registrationDate;// 注册时间
 	private Date registerDate;
 
-	private List<TGroup> groupList = Lists.newArrayList();
+	private List<TMGroup> groupList = Lists.newArrayList();
 
 	@NotBlank
-	public String getLoginName() {
-		return loginName;
+	public String getAccount() {
+		return account;
 	}
 
-	public void setLoginName(String loginName) {
-		this.loginName = loginName;
+	public void setAccount(String account) {
+		this.account = account;
 	}
 
 	public String getName() {
@@ -89,11 +91,11 @@ public class TUser extends IdEntity {
 	@Fetch(value = FetchMode.SUBSELECT)
 	@OrderBy(clause = " id desc ")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	public List<TGroup> getGroupList() {
+	public List<TMGroup> getGroupList() {
 		return groupList;
 	}
 
-	public void setGroupList(List<TGroup> groupList) {
+	public void setGroupList(List<TMGroup> groupList) {
 		this.groupList = groupList;
 	}
 
