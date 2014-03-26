@@ -1,6 +1,7 @@
 package org.springside.modules.test.shiro;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.apache.shiro.SecurityUtils;
 import org.junit.Test;

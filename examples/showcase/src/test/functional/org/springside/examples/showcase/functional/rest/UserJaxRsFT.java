@@ -1,6 +1,6 @@
 package org.springside.examples.showcase.functional.rest;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.BeforeClass;
 import org.junit.Test;

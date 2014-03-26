@@ -1,6 +1,7 @@
 package org.springside.examples.showcase.demos.jms;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import javax.annotation.Resource;
 import javax.jms.Destination;

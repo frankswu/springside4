@@ -1,6 +1,6 @@
 package org.springside.examples.showcase.functional.soap;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import javax.xml.ws.BindingProvider;
 

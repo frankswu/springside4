@@ -1,6 +1,6 @@
 package org.springside.modules.test.functional;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.net.URL;
 

@@ -1,6 +1,6 @@
 package org.springside.examples.quickstart.repository;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

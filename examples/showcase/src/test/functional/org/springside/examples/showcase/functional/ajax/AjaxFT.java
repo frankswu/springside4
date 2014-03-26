@@ -1,6 +1,6 @@
 package org.springside.examples.showcase.functional.ajax;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.openqa.selenium.By;

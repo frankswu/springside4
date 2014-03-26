@@ -1,6 +1,6 @@
 package org.springside.examples.showcase.demos.jms;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
