@@ -14,7 +14,8 @@ public class TMTennisUser extends IdEntity {
 	private String address;// 地址
 	private String birthday;// 生日 用时间戳？（简单的使用格式化的日期字符串也可以）
 	private int gender;// 性别 0代表男士 1代表女士
-	// TODO 图片可能需要建一个单独的图片Model，一般不存数据库（小文件一样的）可能考虑放本地文件系统，或者为了扩展，放云磁盘
+	// 图片可能需要建一个单独的图片Model，一般不存数据库（小文件一样的）可能考虑放本地文件系统，或者为了扩展，放云磁盘
+	private List<TMFileStore> imageList;
 	// Photo 而且客户端就是一个名称和url，服务端需要更多处理信息
 	private String phote;// 头像
 	private String phone;// 联系电话 可能有多个 用|分割 eg: 18000000|1388888888
@@ -29,8 +30,7 @@ public class TMTennisUser extends IdEntity {
 	private int state;// 登陆状态 0 在线 1 不在线 2 黑名单
 	private String integral;// 积分
 	private String accountLevel;// 等级
-	// TODO 好友印象应该也是一个List<Model>可以和评价模型共用
-	// private String friendsImpression;// 好友印象
+	// 好友印象应该也是一个List<Model>可以和评价模型共用
 	private List<TMEvaluate> friendsImpression;// 好友印象
 
 }

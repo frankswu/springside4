@@ -14,6 +14,10 @@ import javax.persistence.Table;
 public class TMEvaluate extends IdEntity {
 
 	private String evaluate;// 评价
-	private int score;// 评分
+	private double score;// 评分
+	/**
+	 * 评论分类
+	 */
+	private TMBaseEnum evaluateCategory;
 
 }

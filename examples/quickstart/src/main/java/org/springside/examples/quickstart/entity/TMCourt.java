@@ -27,8 +27,14 @@ public class TMCourt extends IdEntity {
 	private String courtCount;// 场地片数
 	// 应该是评价模型的列表List<Evaluate>,评分也在里面
 	private List<TMEvaluate> evaluates;// 评价
-	private String score;// 评分
+	// private String score;// 评分
+	/**
+	 * 图片
+	 */
+	private List<TMFileStore> imageList;
 	// 没有理解权重的意思
 	private String weights;// 权重
+	private double longitude;// 经度
+	private double latitude;// 纬度
 
 }
