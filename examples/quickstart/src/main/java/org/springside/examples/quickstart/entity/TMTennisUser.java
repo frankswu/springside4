@@ -25,12 +25,128 @@ public class TMTennisUser extends IdEntity {
 	private int personalInfo;// 个人说明
 	private int loginTimes;// 登陆次数
 	private String lastLoginDate;// 最后登陆时间
-	// TODO 这个如果指的是装备的话，应该也是独立的Model
+	//  这个如果指的是装备的话，应该也是独立的Model
 	private String deviceFlag;// 设备标识
 	private int state;// 登陆状态 0 在线 1 不在线 2 黑名单
 	private String integral;// 积分
 	private String accountLevel;// 等级
 	// 好友印象应该也是一个List<Model>可以和评价模型共用
 	private List<TMEvaluate> friendsImpression;// 好友印象
+	public long getUserId() {
+		return userId;
+	}
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+	public int getGender() {
+		return gender;
+	}
+	public void setGender(int gender) {
+		this.gender = gender;
+	}
+	public List<TMFileStore> getImageList() {
+		return imageList;
+	}
+	public void setImageList(List<TMFileStore> imageList) {
+		this.imageList = imageList;
+	}
+	public String getPhote() {
+		return phote;
+	}
+	public void setPhote(String phote) {
+		this.phote = phote;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public int getTennisAge() {
+		return tennisAge;
+	}
+	public void setTennisAge(int tennisAge) {
+		this.tennisAge = tennisAge;
+	}
+	public int getTennisLevel() {
+		return tennisLevel;
+	}
+	public void setTennisLevel(int tennisLevel) {
+		this.tennisLevel = tennisLevel;
+	}
+	public int getPersonalInfo() {
+		return personalInfo;
+	}
+	public void setPersonalInfo(int personalInfo) {
+		this.personalInfo = personalInfo;
+	}
+	public int getLoginTimes() {
+		return loginTimes;
+	}
+	public void setLoginTimes(int loginTimes) {
+		this.loginTimes = loginTimes;
+	}
+	public String getLastLoginDate() {
+		return lastLoginDate;
+	}
+	public void setLastLoginDate(String lastLoginDate) {
+		this.lastLoginDate = lastLoginDate;
+	}
+	public String getDeviceFlag() {
+		return deviceFlag;
+	}
+	public void setDeviceFlag(String deviceFlag) {
+		this.deviceFlag = deviceFlag;
+	}
+	public int getState() {
+		return state;
+	}
+	public void setState(int state) {
+		this.state = state;
+	}
+	public String getIntegral() {
+		return integral;
+	}
+	public void setIntegral(String integral) {
+		this.integral = integral;
+	}
+	public String getAccountLevel() {
+		return accountLevel;
+	}
+	public void setAccountLevel(String accountLevel) {
+		this.accountLevel = accountLevel;
+	}
+	public List<TMEvaluate> getFriendsImpression() {
+		return friendsImpression;
+	}
+	public void setFriendsImpression(List<TMEvaluate> friendsImpression) {
+		this.friendsImpression = friendsImpression;
+	}
 
+	
+	
 }

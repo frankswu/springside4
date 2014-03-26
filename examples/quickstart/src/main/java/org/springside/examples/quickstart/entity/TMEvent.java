@@ -4,7 +4,12 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * 活动：标题、内容、发起者、联系方式、参与者、费用、 对手水平要求、备注、发起时间、 活动时间、<br>
@@ -45,5 +50,128 @@ public class TMEvent extends IdEntity {
 	private int weight;// 权重
 	// TODO 收藏应该是个中间表，对应活动和人员
 	// boolean collect;// 收藏
+	@NotBlank
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getDescrition() {
+		return descrition;
+	}
+	public void setDescrition(String descrition) {
+		this.descrition = descrition;
+	}
+	@NotBlank
+	public List<TMTennisUser> getOwner() {
+		return owner;
+	}
+	public void setOwner(List<TMTennisUser> owner) {
+		this.owner = owner;
+	}
+	public List<TMTennisUser> getParticipant() {
+		return participant;
+	}
+	public void setParticipant(List<TMTennisUser> participant) {
+		this.participant = participant;
+	}
+	@NotBlank
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	@NotBlank
+	public double getTotolPrice() {
+		return totolPrice;
+	}
+	public void setTotolPrice(double totolPrice) {
+		this.totolPrice = totolPrice;
+	}
+	public String getRequire() {
+		return require;
+	}
+	public void setRequire(String require) {
+		this.require = require;
+	}
+	public List<TMEvaluate> getComments() {
+		return comments;
+	}
+	public void setComments(List<TMEvaluate> comments) {
+		this.comments = comments;
+	}
+	public Date getCommitTime() {
+		return commitTime;
+	}
+	public void setCommitTime(Date commitTime) {
+		this.commitTime = commitTime;
+	}
+	@NotBlank
+	public Date getEventTime() {
+		return eventTime;
+	}
+	public void setEventTime(Date eventTime) {
+		this.eventTime = eventTime;
+	}
+	@NotBlank
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	@NotBlank
+	public List<TMCourt> getCourt() {
+		return court;
+	}
+	public void setCourt(List<TMCourt> court) {
+		this.court = court;
+	}
+	public double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+	public double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	@NotNull
+	@OneToOne
+	@JoinColumn(name="categoryId")
+	public TMBaseEnum getCategory() {
+		return category;
+	}
+	public void setCategory(TMBaseEnum category) {
+		this.category = category;
+	}
+	@NotNull
+	@OneToOne
+	@JoinColumn(name="event_status_id")
+	public TMBaseEnum getStatues() {
+		return statues;
+	}
+	public void setStatues(TMBaseEnum statues) {
+		this.statues = statues;
+	}
+	public int getWeight() {
+		return weight;
+	}
+	public void setWeight(int weight) {
+		this.weight = weight;
+	}
 
+	
+	
 }
