@@ -25,6 +25,7 @@ import com.google.common.collect.Lists;
 
 @Entity
 @Table(name = "base_user_tb")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class TMBaseUser extends IdEntity {
 
 	private String account;
