@@ -20,7 +20,7 @@ import com.google.common.collect.Lists;
  * 
  */
 @Entity
-@Table(name = "court_tb")
+@Table(name = "tb_court")
 public class TMCourt extends IdEntity {
 
 	// private String courtId;// 场地id
@@ -39,7 +39,7 @@ public class TMCourt extends IdEntity {
 
 	// private String score;// 评分
 	/**
-	 * 图片
+	 * TODO frankswu : 修改为多对多，图片
 	 */
 	private List<TMFileStore> imageList;
 	// 没有理解权重的意思

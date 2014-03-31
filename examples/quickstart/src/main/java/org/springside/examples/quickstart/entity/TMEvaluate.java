@@ -16,18 +16,18 @@ import org.hibernate.validator.constraints.NotBlank;
  * 
  */
 @Entity
-@Table(name = "evaluate_tb")
+@Table(name = "tb_evaluate")
 public class TMEvaluate extends IdEntity {
 
 	private String evaluate;// 评价
 	private double score;// 评分
 
 	/**
-	 * 场地
+	 * TODO frankswu : 重构为多对多，场地
 	 */
 	private TMCourt court;
 	/**
-	 * 活动
+	 * TODO frankswu : 重构为多对多，活动
 	 */
 	private TMEvent event;
 	/**

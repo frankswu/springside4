@@ -23,8 +23,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
+/**
+ * 
+ * 基础用户
+ * 
+ * @author yq_wu
+ * 
+ */
 @Entity
-@Table(name = "base_user_tb")
+@Table(name = "tb_base_user")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class TMBaseUser extends IdEntity {
 

@@ -16,8 +16,12 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.OrderBy;
 
+/**
+ * @author yq_wu
+ * 
+ */
 @Entity
-@Table(name = "tennis_user_tb")
+@Table(name = "tb_tennis_user")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class TMTennisUser extends IdEntity {
 
@@ -179,7 +183,7 @@ public class TMTennisUser extends IdEntity {
 	}
 
 	@ManyToMany
-	@JoinTable(name = "user_friends_tb", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "evaluate") })
+	@JoinTable(name = "tb_user_friends", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "evaluate_id") })
 	@Fetch(value = FetchMode.SUBSELECT)
 	@OrderBy(clause = "id desc")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)

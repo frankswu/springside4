@@ -5,8 +5,14 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+/**
+ * 基础城市或地址
+ * 
+ * @author yq_wu
+ * 
+ */
 @Entity
-@Table(name = "base_city_tb")
+@Table(name = "tb_base_city")
 public class TMBaseCity extends IdEntity {
 	/** 城市名称 */
 	private String cityName;

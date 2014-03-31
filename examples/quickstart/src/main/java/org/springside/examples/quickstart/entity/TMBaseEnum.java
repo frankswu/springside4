@@ -12,7 +12,7 @@ import org.hibernate.validator.constraints.NotBlank;
  * 
  */
 @Entity
-@Table(name = "base_enum_tb")
+@Table(name = "tb_base_enum")
 public class TMBaseEnum extends IdEntity {
 
 	private String enumType;// 基础枚举类型

@@ -16,7 +16,7 @@ import org.hibernate.validator.constraints.NotBlank;
  * 
  */
 @Entity
-@Table(name = "file_store_tb")
+@Table(name = "tb_file_store")
 public class TMFileStore extends IdEntity {
 	/** 文件名称 */
 	private String fileName;

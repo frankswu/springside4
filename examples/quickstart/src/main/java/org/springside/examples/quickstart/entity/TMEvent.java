@@ -82,7 +82,7 @@ public class TMEvent extends IdEntity {
 	}
 
 	@ManyToMany
-	@JoinTable(name = "event_owner_tb", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = { @JoinColumn(name = "owner_id") })
+	@JoinTable(name = "tb_event_owner", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = { @JoinColumn(name = "owner_id") })
 	@Fetch(value = FetchMode.SUBSELECT)
 	@OrderBy(clause = " id desc")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -95,7 +95,7 @@ public class TMEvent extends IdEntity {
 	}
 
 	@ManyToMany
-	@JoinTable(name = "event_partake_tb", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = { @JoinColumn(name = "partake_id") })
+	@JoinTable(name = "tb_event_partake", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = { @JoinColumn(name = "partake_id") })
 	@Fetch(value = FetchMode.SUBSELECT)
 	@OrderBy(clause = " id desc")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -169,7 +169,7 @@ public class TMEvent extends IdEntity {
 	}
 
 	@ManyToMany
-	@JoinTable(name = "event_court_tb", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = { @JoinColumn(name = "court_id") })
+	@JoinTable(name = "tb_event_court", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = { @JoinColumn(name = "court_id") })
 	@Fetch(value = FetchMode.SUBSELECT)
 	@OrderBy(clause = "id desc")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -236,7 +236,7 @@ public class TMEvent extends IdEntity {
 	}
 
 	@ManyToMany
-	@JoinTable(name = "event_startuser_tb", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = { @JoinColumn(name = "startuser_id") })
+	@JoinTable(name = "tb_event_startuser", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = { @JoinColumn(name = "startuser_id") })
 	@Fetch(value = FetchMode.SUBSELECT)
 	@OrderBy(clause = "id desc")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
