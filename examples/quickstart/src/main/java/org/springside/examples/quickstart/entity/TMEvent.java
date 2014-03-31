@@ -60,7 +60,7 @@ public class TMEvent extends IdEntity {
 	// 没有理解权重的意思
 	private int weight;// 权重
 
-	// TODO 收藏应该是个中间表，对应活动和人员
+	//  收藏应该是个中间表，对应活动和人员
 	private List<TMBaseUser> startUsersList = Lists.newArrayList();
 
 	// boolean collect;// 收藏
@@ -133,7 +133,12 @@ public class TMEvent extends IdEntity {
 		this.require = require;
 	}
 
-	@OneToMany(mappedBy = "event")
+
+	@ManyToMany
+	@JoinTable(name="tb_event_evaluate",joinColumns={@JoinColumn(name="event_id")},inverseJoinColumns={@JoinColumn(name="evaluate_id")})
+	@Fetch(value=FetchMode.SUBSELECT)
+	@OrderBy(clause="id desc")
+	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 	public List<TMEvaluate> getComments() {
 		return comments;
 	}

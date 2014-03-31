@@ -25,10 +25,10 @@ public class TMFileStore extends IdEntity {
 	/** 文件类型 */
 	private TMBaseEnum fileType;
 
-	/**
-	 * 场地
-	 */
-	private TMCourt court;
+//	/**
+//	 * 场地
+//	 */
+//	private TMCourt court;
 
 	@NotBlank
 	public String getFileName() {
@@ -59,14 +59,5 @@ public class TMFileStore extends IdEntity {
 		this.fileType = fileType;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "court_id")
-	public TMCourt getCourt() {
-		return court;
-	}
-
-	public void setCourt(TMCourt court) {
-		this.court = court;
-	}
 
 }

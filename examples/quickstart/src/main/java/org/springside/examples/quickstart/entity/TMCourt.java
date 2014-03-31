@@ -4,11 +4,18 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.OrderBy;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.google.common.collect.Lists;
@@ -39,7 +46,7 @@ public class TMCourt extends IdEntity {
 
 	// private String score;// 评分
 	/**
-	 * TODO frankswu : 修改为多对多，图片
+	 * 图片
 	 */
 	private List<TMFileStore> imageList;
 	// 没有理解权重的意思
@@ -106,7 +113,11 @@ public class TMCourt extends IdEntity {
 		this.courtCount = courtCount;
 	}
 
-	@OneToMany(mappedBy = "court")
+	@ManyToMany
+	@JoinTable(name="tb_court_evaluate",joinColumns={@JoinColumn(name="court_id")},inverseJoinColumns={@JoinColumn(name="evaluate_id")})
+	@Fetch(value=FetchMode.SUBSELECT)
+	@OrderBy(clause="id desc")
+	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 	public List<TMEvaluate> getEvaluates() {
 		return evaluates;
 	}
@@ -115,7 +126,12 @@ public class TMCourt extends IdEntity {
 		this.evaluates = evaluates;
 	}
 
-	@OneToMany(mappedBy = "court")
+	
+	@ManyToMany
+	@JoinTable(name="tb_court_images",joinColumns={@JoinColumn(name="court_id")},inverseJoinColumns={@JoinColumn(name="image_id")})
+	@Fetch(value=FetchMode.SUBSELECT)
+	@OrderBy(clause="id desc")
+	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 	public List<TMFileStore> getImageList() {
 		return imageList;
 	}

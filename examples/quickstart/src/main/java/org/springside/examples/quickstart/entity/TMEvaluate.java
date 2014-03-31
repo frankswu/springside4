@@ -23,14 +23,6 @@ public class TMEvaluate extends IdEntity {
 	private double score;// 评分
 
 	/**
-	 * TODO frankswu : 重构为多对多，场地
-	 */
-	private TMCourt court;
-	/**
-	 * TODO frankswu : 重构为多对多，活动
-	 */
-	private TMEvent event;
-	/**
 	 * 评论分类
 	 */
 	private TMBaseEnum evaluateCategory;
@@ -64,24 +56,6 @@ public class TMEvaluate extends IdEntity {
 		this.evaluateCategory = evaluateCategory;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "court_id")
-	public TMCourt getCourt() {
-		return court;
-	}
 
-	public void setCourt(TMCourt court) {
-		this.court = court;
-	}
-
-	@ManyToOne
-	@JoinColumn(name = "event_id")
-	public TMEvent getEvent() {
-		return event;
-	}
-
-	public void setEvent(TMEvent event) {
-		this.event = event;
-	}
 
 }
