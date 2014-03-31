@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -30,29 +29,57 @@ import com.google.common.collect.Lists;
 @Table(name = "tb_court")
 public class TMCourt extends IdEntity {
 
-	// private String courtId;// 场地id
-	private String address;// 场地地址
-	// TODO 城市和区县，可以用一张表
-	private TMBaseCity city;// 城市id
-	private TMBaseCity district;// 区县id
-	private String phone;// 联系电话 可能有多个 用|分割 eg: 18000000|1388888888
-	private String startTime;// 开始时间
-	private String endTime;// 结束时间
-	private String fee;// 收费标准
-	private String courtDesc;// 场地情况
-	private String courtCount;// 场地片数
-	// 应该是评价模型的列表List<Evaluate>,评分也在里面
-	private List<TMEvaluate> evaluates = Lists.newArrayList();// 评价
-
-	// private String score;// 评分
-	/**
-	 * 图片
-	 */
-	private List<TMFileStore> imageList;
-	// 没有理解权重的意思
-	private String weights;// 权重
-	private double longitude;// 经度
-	private double latitude;// 纬度
+    /** 场地地址 */
+    private String address;
+    /** 城市id TODO 城市和区县，可以用一张表 */
+    private TMBaseCity city;
+    /** 区县id */
+    private TMBaseCity district;
+    /** 联系电话 */
+    private String phone;
+    /** 开始时间 */
+    private String startTime;
+    /** 结束时间 */
+    private String endTime;
+    /** 收费标准 */
+    private String fee;
+    /** 场地情况 */
+    private String courtDesc;
+    /** 场地片数 */
+    private String courtCount;
+    /** 评价 */
+    private List<TMEvaluate> evaluates = Lists.newArrayList();
+    /** 图片 */
+    private List<TMFileStore> imageList = Lists.newArrayList();
+    /** 权重 */
+    private String weights;
+    /** 经度 */
+    private double longitude;
+    /** 纬度 */
+    private double latitude;
+//
+//	// private String courtId;// 场地id
+//	private String address;// 场地地址
+//	private TMBaseCity city;// 城市id
+//	private TMBaseCity district;// 区县id
+//	private String phone;// 联系电话 可能有多个 用|分割 eg: 18000000|1388888888
+//	private String startTime;// 开始时间
+//	private String endTime;// 结束时间
+//	private String fee;// 收费标准
+//	private String courtDesc;// 场地情况
+//	private String courtCount;// 场地片数
+//	// 应该是评价模型的列表List<Evaluate>,评分也在里面
+//	private List<TMEvaluate> evaluates = Lists.newArrayList();// 评价
+//
+//	// private String score;// 评分
+//	/**
+//	 * 图片
+//	 */
+//	private List<TMFileStore> imageList;
+//	// 没有理解权重的意思
+//	private String weights;// 权重
+//	private double longitude;// 经度
+//	private double latitude;// 纬度
 
 	@NotBlank
 	public String getAddress() {
