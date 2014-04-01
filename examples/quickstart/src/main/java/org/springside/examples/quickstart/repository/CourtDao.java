@@ -14,11 +14,11 @@ import org.springside.examples.quickstart.entity.TMCourt;
  */
 public interface CourtDao extends PagingAndSortingRepository<TMCourt, Long>, JpaSpecificationExecutor<TMCourt> {
 
-    Page<TMCourt> findByXXXXId(Long id, Pageable pageRequest);
-
-    TMCourt findByXXXXX(String loginName);
-
-    @Modifying
-	@Query("delete from TMCourt TMCourt where TMCourt.user.id=?1")
-	void deleteByXXXXXId(Long id);
+//    Page<TMCourt> findByXXXXId(Long id, Pageable pageRequest);
+//
+//    TMCourt findByXXXXX(String loginName);
+//
+//    @Modifying
+//	@Query("delete from TMCourt TMCourt where TMCourt.user.id=?1")
+//	void deleteByXXXXXId(Long id);
 }

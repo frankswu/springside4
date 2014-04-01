@@ -14,11 +14,11 @@ import org.springside.examples.quickstart.entity.TMGroup;
  */
 public interface GroupDao extends PagingAndSortingRepository<TMGroup, Long>, JpaSpecificationExecutor<TMGroup> {
 
-    Page<TMGroup> findByXXXXId(Long id, Pageable pageRequest);
-
-    TMGroup findByXXXXX(String loginName);
-
-    @Modifying
-	@Query("delete from TMGroup TMGroup where TMGroup.user.id=?1")
-	void deleteByXXXXXId(Long id);
+//    Page<TMGroup> findByXXXXId(Long id, Pageable pageRequest);
+//
+//    TMGroup findByXXXXX(String loginName);
+//
+//    @Modifying
+//	@Query("delete from TMGroup TMGroup where TMGroup.user.id=?1")
+//	void deleteByXXXXXId(Long id);
 }

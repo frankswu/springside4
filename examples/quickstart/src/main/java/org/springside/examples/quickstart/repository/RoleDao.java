@@ -14,11 +14,11 @@ import org.springside.examples.quickstart.entity.TMRole;
  */
 public interface RoleDao extends PagingAndSortingRepository<TMRole, Long>, JpaSpecificationExecutor<TMRole> {
 
-    Page<TMRole> findByXXXXId(Long id, Pageable pageRequest);
-
-    TMRole findByXXXXX(String loginName);
-
-    @Modifying
-	@Query("delete from TMRole TMRole where TMRole.user.id=?1")
-	void deleteByXXXXXId(Long id);
+//    Page<TMRole> findByXXXXId(Long id, Pageable pageRequest);
+//
+//    TMRole findByXXXXX(String loginName);
+//
+//    @Modifying
+//	@Query("delete from TMRole TMRole where TMRole.user.id=?1")
+//	void deleteByXXXXXId(Long id);
 }

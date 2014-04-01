@@ -14,11 +14,11 @@ import org.springside.examples.quickstart.entity.TMFileStore;
  */
 public interface FileStoreDao extends PagingAndSortingRepository<TMFileStore, Long>, JpaSpecificationExecutor<TMFileStore> {
 
-    Page<TMFileStore> findByXXXXId(Long id, Pageable pageRequest);
-
-    TMFileStore findByXXXXX(String loginName);
-
-    @Modifying
-	@Query("delete from TMFileStore TMFileStore where TMFileStore.user.id=?1")
-	void deleteByXXXXXId(Long id);
+//    Page<TMFileStore> findByXXXXId(Long id, Pageable pageRequest);
+//
+//    TMFileStore findByXXXXX(String loginName);
+//
+//    @Modifying
+//	@Query("delete from TMFileStore TMFileStore where TMFileStore.user.id=?1")
+//	void deleteByXXXXXId(Long id);
 }

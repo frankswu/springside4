@@ -14,11 +14,11 @@ import org.springside.examples.quickstart.entity.TMTennisUser;
  */
 public interface TenniesUserDao extends PagingAndSortingRepository<TMTennisUser, Long>, JpaSpecificationExecutor<TMTennisUser> {
 
-    Page<TMTennisUser> findByXXXXId(Long id, Pageable pageRequest);
-
-    TMTennisUser findByXXXXX(String loginName);
-
-    @Modifying
-	@Query("delete from TMTennisUser TMTennisUser where TMTennisUser.user.id=?1")
-	void deleteByXXXXXId(Long id);
+//    Page<TMTennisUser> findByXXXXId(Long id, Pageable pageRequest);
+//
+//    TMTennisUser findByXXXXX(String loginName);
+//
+//    @Modifying
+//	@Query("delete from TMTennisUser TMTennisUser where TMTennisUser.user.id=?1")
+//	void deleteByXXXXXId(Long id);
 }

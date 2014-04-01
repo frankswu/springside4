@@ -14,11 +14,11 @@ import org.springside.examples.quickstart.entity.TMEvent;
  */
 public interface EventDao extends PagingAndSortingRepository<TMEvent, Long>, JpaSpecificationExecutor<TMEvent> {
 
-    Page<TMEvent> findByXXXXId(Long id, Pageable pageRequest);
-
-    TMEvent findByXXXXX(String loginName);
-
-    @Modifying
-	@Query("delete from TMEvent TMEvent where TMEvent.user.id=?1")
-	void deleteByXXXXXId(Long id);
+//    Page<TMEvent> findByXXXXId(Long id, Pageable pageRequest);
+//
+//    TMEvent findByXXXXX(String loginName);
+//
+//    @Modifying
+//	@Query("delete from TMEvent TMEvent where TMEvent.user.id=?1")
+//	void deleteByXXXXXId(Long id);
 }

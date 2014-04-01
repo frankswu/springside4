@@ -14,11 +14,11 @@ import org.springside.examples.quickstart.entity.TMBaseCity;
  */
 public interface BaseCityDao extends PagingAndSortingRepository<TMBaseCity, Long>, JpaSpecificationExecutor<TMBaseCity> {
 
-    Page<TMBaseCity> findByXXXXId(Long id, Pageable pageRequest);
-
-    TMBaseCity findByXXXXX(String loginName);
-
-    @Modifying
-	@Query("delete from TMBaseCity TMBaseCity where TMBaseCity.user.id=?1")
-	void deleteByXXXXXId(Long id);
+//    Page<TMBaseCity> findByXXXXId(Long id, Pageable pageRequest);
+//
+//    TMBaseCity findByXXXXX(String loginName);
+//
+//    @Modifying
+//	@Query("delete from TMBaseCity TMBaseCity where TMBaseCity.user.id=?1")
+//	void deleteByXXXXXId(Long id);
 }

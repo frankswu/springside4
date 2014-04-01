@@ -14,11 +14,11 @@ import org.springside.examples.quickstart.entity.TMEvaluate;
  */
 public interface EvaluateDao extends PagingAndSortingRepository<TMEvaluate, Long>, JpaSpecificationExecutor<TMEvaluate> {
 
-    Page<TMEvaluate> findByXXXXId(Long id, Pageable pageRequest);
-
-    TMEvaluate findByXXXXX(String loginName);
-
-    @Modifying
-	@Query("delete from TMEvaluate TMEvaluate where TMEvaluate.user.id=?1")
-	void deleteByXXXXXId(Long id);
+//    Page<TMEvaluate> findByXXXXId(Long id, Pageable pageRequest);
+//
+//    TMEvaluate findByXXXXX(String loginName);
+//
+//    @Modifying
+//	@Query("delete from TMEvaluate TMEvaluate where TMEvaluate.user.id=?1")
+//	void deleteByXXXXXId(Long id);
 }
