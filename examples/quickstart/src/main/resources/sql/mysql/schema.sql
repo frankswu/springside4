@@ -70,8 +70,8 @@ create table tb_court (
     `district_id` bigint  null,
     `address` varchar(255) null,
     `weights` varchar(255) null,
-    `latitude` double(5,10)  null,
-    `longitude` double(5,10)  null,
+    `latitude` double(10,8)  null,
+    `longitude` double(10,8)  null,
     `courtDesc` varchar(255) null,
     primary key (id)
 ) engine=InnoDB;
@@ -108,20 +108,20 @@ create table tb_event_evaluate (
 ) engine=InnoDB;
 
 --
-drop table if exists event_tb;
+drop table if exists tb_event;
 
 
-create table event_tb (
+create table tb_event (
 	id bigint auto_increment,
     `eventTime` TIMESTAMP  null,
     `commitTime` TIMESTAMP  null,
     `require` varchar(255) null,
     `category_id` bigint  null,
     `address` varchar(255) null,
-    `totolPrice` double(5,10)  null,
+    `totolPrice` double(10,8)  null,
     `phone` varchar(255) null,
-    `latitude` double(5,10)  null,
-    `longitude` double(5,10)  null,
+    `latitude` double(10,8)  null,
+    `longitude` double(10,8)  null,
     `descrition` varchar(255) null,
     `remark` varchar(255) null,
     `title` bigint  null,

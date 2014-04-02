@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -29,80 +28,49 @@ import com.google.common.collect.Lists;
  * 
  */
 @Entity
-@Table(name = "event_tb")
+@Table(name = "tb_event")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class TMEvent extends IdEntity {
 
+	/** 标题 */
 	private String title;// 标题
-    /** 内容描述 */
-    private String descrition;
-    /**  // 发起者 */
-    private List<TMTennisUser> owner = Lists.newArrayList();
-    /**  // 参与者 */
-    private List<TMTennisUser> participant = Lists.newArrayList();
-    /** 电话 */
-    private String phone;
-    /** 费用 */
-    private double totolPrice;
-    /** 对手水平要求 */
-    private String require;
-    /** 评论 */
-    private List<TMEvaluate> comments = Lists.newArrayList();
-    /** 发起时间 */
-    private Date commitTime;
-    /** 活动时间 */
-    private Date eventTime;
-    /** 地点 */
-    private String address;
-    /** 场地 */
-    private List<TMCourt> court = Lists.newArrayList();
-    /** 经度 */
-    private double longitude;
-    /** 纬度 */
-    private double latitude;
-    /** 备注 */
-    private String remark;
-    /** 分类 */
-    private TMBaseEnum category;
-    /** 状态：2审核中，1未完成，0已完成 */
-    private TMBaseEnum statues;
-    /** 权重 */
-    private int weight;
-    /** 收藏 */
-    private List<TMBaseUser> startUsersList = Lists.newArrayList();
-	
-	
-	
-//	private String descrition;// 内容描述
-//	// 应该是发起者的LIST<userID>
-//	private List<TMTennisUser> owner = Lists.newArrayList(); // 发起者
-//	// same as up
-//	private List<TMTennisUser> participant = Lists.newArrayList(); // 参与者
-//	private String phone;// 电话
-//	private double totolPrice;// 费用
-//
-//	private String require;// 对手水平要求
-//	// 评论模型List<>
-//	private List<TMEvaluate> comments = Lists.newArrayList();// 评论
-//	private Date commitTime;// 发起时间
-//	private Date eventTime;// 活动时间
-//	private String address;// 地点
-//	private List<TMCourt> court = Lists.newArrayList();// 场地
-//	// 活动经纬度
-//	private double longitude;// 经度
-//	private double latitude;// 纬度
-//	private String remark;// 备注
-//	// 分类枚举
-//	private TMBaseEnum category;// 分类
-//	// 谁来审批？是审批什么，我个人理解是发布活动的权限
-//	private TMBaseEnum statues;// 状态：2审核中，1未完成，0已完成
-//	// 没有理解权重的意思
-//	private int weight;// 权重
-//
-//	//  收藏应该是个中间表，对应活动和人员
-//	private List<TMBaseUser> startUsersList = Lists.newArrayList();
+	/** 内容描述 */
+	private String descrition;
+	/** 电话 */
+	private String phone;
+	/** 费用 */
+	private double totolPrice;
+	/** 对手水平要求 */
+	private String require;
+	/** 发起时间 */
+	private Date commitTime;
+	/** 活动时间 */
+	private Date eventTime;
+	/** 地点 */
+	private String address;
+	/** 经度 */
+	private double longitude;
+	/** 纬度 */
+	private double latitude;
+	/** 备注 */
+	private String remark;
+	/** 分类 */
+	private TMBaseEnum category;
+	/** 状态：2审核中，1未完成，0已完成 */
+	private TMBaseEnum statues;
+	/** 权重 */
+	private int weight;
+	/** 收藏 */
+	private List<TMBaseUser> startUsersList = Lists.newArrayList();
+	/** 发起者 */
+	private List<TMTennisUser> owner = Lists.newArrayList();
+	/** 参与者 */
+	private List<TMTennisUser> participant = Lists.newArrayList();
+	/** 评论 */
+	private List<TMEvaluate> comments = Lists.newArrayList();
+	/** 场地 */
+	private List<TMCourt> court = Lists.newArrayList();
 
-	// boolean collect;// 收藏
 	@NotBlank
 	public String getTitle() {
 		return title;
@@ -118,32 +86,6 @@ public class TMEvent extends IdEntity {
 
 	public void setDescrition(String descrition) {
 		this.descrition = descrition;
-	}
-
-	@ManyToMany
-	@JoinTable(name = "tb_event_owner", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = { @JoinColumn(name = "owner_id") })
-	@Fetch(value = FetchMode.SUBSELECT)
-	@OrderBy(clause = " id desc")
-	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	public List<TMTennisUser> getOwner() {
-		return owner;
-	}
-
-	public void setOwner(List<TMTennisUser> owner) {
-		this.owner = owner;
-	}
-
-	@ManyToMany
-	@JoinTable(name = "tb_event_partake", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = { @JoinColumn(name = "partake_id") })
-	@Fetch(value = FetchMode.SUBSELECT)
-	@OrderBy(clause = " id desc")
-	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	public List<TMTennisUser> getParticipant() {
-		return participant;
-	}
-
-	public void setParticipant(List<TMTennisUser> participant) {
-		this.participant = participant;
 	}
 
 	@NotBlank
@@ -172,20 +114,6 @@ public class TMEvent extends IdEntity {
 		this.require = require;
 	}
 
-
-	@ManyToMany
-	@JoinTable(name="tb_event_evaluate",joinColumns={@JoinColumn(name="event_id")},inverseJoinColumns={@JoinColumn(name="evaluate_id")})
-	@Fetch(value=FetchMode.SUBSELECT)
-	@OrderBy(clause="id desc")
-	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
-	public List<TMEvaluate> getComments() {
-		return comments;
-	}
-
-	public void setComments(List<TMEvaluate> comments) {
-		this.comments = comments;
-	}
-
 	public Date getCommitTime() {
 		return commitTime;
 	}
@@ -210,19 +138,6 @@ public class TMEvent extends IdEntity {
 
 	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	@ManyToMany
-	@JoinTable(name = "tb_event_court", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = { @JoinColumn(name = "court_id") })
-	@Fetch(value = FetchMode.SUBSELECT)
-	@OrderBy(clause = "id desc")
-	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	public List<TMCourt> getCourt() {
-		return court;
-	}
-
-	public void setCourt(List<TMCourt> court) {
-		this.court = court;
 	}
 
 	public double getLongitude() {
@@ -292,4 +207,55 @@ public class TMEvent extends IdEntity {
 		this.startUsersList = startUsersList;
 	}
 
+	@ManyToMany
+	@JoinTable(name = "tb_event_owner", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = { @JoinColumn(name = "owner_id") })
+	@Fetch(value = FetchMode.SUBSELECT)
+	@OrderBy(clause = " id desc")
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+	public List<TMTennisUser> getOwner() {
+		return owner;
+	}
+
+	public void setOwner(List<TMTennisUser> owner) {
+		this.owner = owner;
+	}
+
+	@ManyToMany
+	@JoinTable(name = "tb_event_partake", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = { @JoinColumn(name = "partake_id") })
+	@Fetch(value = FetchMode.SUBSELECT)
+	@OrderBy(clause = " id desc")
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+	public List<TMTennisUser> getParticipant() {
+		return participant;
+	}
+
+	public void setParticipant(List<TMTennisUser> participant) {
+		this.participant = participant;
+	}
+
+	@ManyToMany
+	@JoinTable(name = "tb_event_court", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = { @JoinColumn(name = "court_id") })
+	@Fetch(value = FetchMode.SUBSELECT)
+	@OrderBy(clause = "id desc")
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+	public List<TMCourt> getCourt() {
+		return court;
+	}
+
+	public void setCourt(List<TMCourt> court) {
+		this.court = court;
+	}
+
+	@ManyToMany
+	@JoinTable(name = "tb_event_evaluate", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = { @JoinColumn(name = "evaluate_id") })
+	@Fetch(value = FetchMode.SUBSELECT)
+	@OrderBy(clause = "id desc")
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+	public List<TMEvaluate> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<TMEvaluate> comments) {
+		this.comments = comments;
+	}
 }
