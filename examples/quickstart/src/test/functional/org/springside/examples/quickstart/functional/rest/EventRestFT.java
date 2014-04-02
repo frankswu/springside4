@@ -48,8 +48,8 @@ public class EventRestFT extends BaseFunctionalTestCase {
 	@Category(Smoke.class)
 	public void listTMEvents() {
 		TMEventList TMEvents = restTemplate.getForObject(resoureUrl, TMEventList.class);
-		assertEquals(5, TMEvents.size());
-//		assertEquals("Study PlayFramework 2.0", TMEvents.get(0).getTitle());
+		assertEquals(1, TMEvents.size());
+		assertEquals("Study PlayFramework 2.0", TMEvents.get(0).getTitle());
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class EventRestFT extends BaseFunctionalTestCase {
 	@Category(Smoke.class)
 	public void getTMEvent() {
 		TMEvent TMEvent = restTemplate.getForObject(resoureUrl + "/{id}", TMEvent.class, 1L);
-//		assertEquals("Study PlayFramework 2.0", TMEvent.getTitle());
+		assertEquals("Study PlayFramework 2.0", TMEvent.getTitle());
 	}
 
 	/**
@@ -70,8 +70,8 @@ public class EventRestFT extends BaseFunctionalTestCase {
 	public void createUpdateAndDeleteTMEvent() {
 
 		// create
-//		TMEvent TMEvent = TMEventData.randomTMEvent();
-		TMEvent TMEvent = new TMEvent();
+		TMEvent TMEvent = TMEventData.randomEvent();
+//		TMEvent TMEvent = new TMEvent();
 
 		URI TMEventUri = restTemplate.postForLocation(resoureUrl, TMEvent);
 		System.out.println(TMEventUri.toString());

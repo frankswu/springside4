@@ -11,11 +11,29 @@ import org.springside.modules.test.data.RandomData;
 public class TMEventData {
 
 	public static TMEvent randomEvent() {
-		TMEvent Event = new TMEvent();
-//		Event.setTitle(randomTitle());
-		//User user = new User(1L);
-//		Event.setUser(user);
-		return Event;
+		TMEvent event = new TMEvent();
+        event.setTitle(randomTitle()); 
+ event.setDescrition(randomDescrition()); 
+// event.setOwner(randomOwner()); 
+// event.setParticipant(randomParticipant()); 
+ event.setPhone(randomPhone()); 
+// event.setTotolPrice(randomTotolprice()); 
+ event.setRequire(randomRequire()); 
+// event.setComments(randomComments()); 
+// event.setCommittime(randomCommittime()); 
+// event.setEventtime(randomEventtime()); 
+ event.setAddress(randomAddress()); 
+// event.setCourt(randomCourt()); 
+// event.setLongitude(randomLongitude()); 
+// event.setLatitude(randomLatitude()); 
+ event.setRemark(randomRemark()); 
+// event.setCategory(randomCategory()); 
+// event.setStatues(randomStatues()); 
+// event.setWeight(randomWeight()); 
+// event.setStartuserslist(randomStartuserslist()); 
+
+		
+		return event;
 	}
 	
 	/**  */
