@@ -1,6 +1,11 @@
 package org.springside.examples.quickstart.data;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import org.springside.examples.quickstart.entity.TMEvent;
+import org.springside.examples.quickstart.entity.TMTennisUser;
 import org.springside.modules.test.data.RandomData;
 
 /**
@@ -13,19 +18,20 @@ public class TMEventData {
 	public static TMEvent randomEvent() {
 		TMEvent event = new TMEvent();
         event.setTitle(randomTitle()); 
+        
  event.setDescrition(randomDescrition()); 
-// event.setOwner(randomOwner()); 
+ event.setOwner(randomOwner()); 
 // event.setParticipant(randomParticipant()); 
  event.setPhone(randomPhone()); 
-// event.setTotolPrice(randomTotolprice()); 
+ event.setTotolPrice(randomTotolprice()); 
  event.setRequire(randomRequire()); 
 // event.setComments(randomComments()); 
-// event.setCommittime(randomCommittime()); 
-// event.setEventtime(randomEventtime()); 
+ event.setCommitTime(new Date());
+ event.setEventTime(new Date());
  event.setAddress(randomAddress()); 
 // event.setCourt(randomCourt()); 
-// event.setLongitude(randomLongitude()); 
-// event.setLatitude(randomLatitude()); 
+ event.setLongitude(randomLongitude()); 
+ event.setLatitude(randomLatitude()); 
  event.setRemark(randomRemark()); 
 // event.setCategory(randomCategory()); 
 // event.setStatues(randomStatues()); 
@@ -45,8 +51,12 @@ public class TMEventData {
 		return RandomData.randomName("descrition");
 	}
 	/**  // 发起者 */
-  	public static String randomOwner() {
-		return RandomData.randomName("owner");
+  	public static List<TMTennisUser> randomOwner() {
+		List<TMTennisUser> owners = new ArrayList<TMTennisUser>();
+		TMTennisUser owner = new TMTennisUser();
+		owner.setId(1L);
+		owners.add(owner);
+		return owners ;
 	}
 	/**  // 参与者 */
   	public static String randomParticipant() {
@@ -57,8 +67,8 @@ public class TMEventData {
 		return RandomData.randomName("phone");
 	}
 	/** 费用 */
-  	public static String randomTotolprice() {
-		return RandomData.randomName("totolprice");
+  	public static int randomTotolprice() {
+		return RandomData.randomInt();
 	}
 	/** 对手水平要求 */
   	public static String randomRequire() {
@@ -70,11 +80,11 @@ public class TMEventData {
 	}
 	/** 发起时间 */
   	public static String randomCommittime() {
-		return RandomData.randomName("committime");
+		return RandomData.randomDate();
 	}
 	/** 活动时间 */
   	public static String randomEventtime() {
-		return RandomData.randomName("eventtime");
+		return RandomData.randomDate();
 	}
 	/** 地点 */
   	public static String randomAddress() {
@@ -85,12 +95,12 @@ public class TMEventData {
 		return RandomData.randomName("court");
 	}
 	/** 经度 */
-  	public static String randomLongitude() {
-		return RandomData.randomName("longitude");
+  	public static double randomLongitude() {
+		return RandomData.randomDouble();
 	}
 	/** 纬度 */
-  	public static String randomLatitude() {
-		return RandomData.randomName("latitude");
+  	public static double randomLatitude() {
+		return RandomData.randomDouble();
 	}
 	/** 备注 */
   	public static String randomRemark() {

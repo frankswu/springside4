@@ -69,7 +69,7 @@ public class TMEvent extends IdEntity {
 	/** 评论 */
 	private List<TMEvaluate> comments = Lists.newArrayList();
 	/** 场地 */
-	private List<TMCourt> court = Lists.newArrayList();
+	private List<TMCourt> courtList = Lists.newArrayList();
 
 	@NotBlank
 	public String getTitle() {
@@ -238,12 +238,12 @@ public class TMEvent extends IdEntity {
 	@Fetch(value = FetchMode.SUBSELECT)
 	@OrderBy(clause = "id desc")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	public List<TMCourt> getCourt() {
-		return court;
+	public List<TMCourt> getCourtList() {
+		return courtList;
 	}
 
-	public void setCourt(List<TMCourt> court) {
-		this.court = court;
+	public void setCourtList(List<TMCourt> court) {
+		this.courtList = court;
 	}
 
 	@ManyToMany

@@ -5,7 +5,9 @@
  */
 package org.springside.modules.test.data;
 
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -18,6 +20,14 @@ public class RandomData {
 
 	private static Random random = new Random();
 
+	public static int randomInt() {
+		return random.nextInt();
+	} 
+	
+	public static  double randomDouble() {
+		return random.nextDouble();
+	}
+	
 	/**
 	 * 返回随机ID.
 	 */
@@ -57,5 +67,9 @@ public class RandomData {
 			size = 1;
 		}
 		return randomSome(list, size);
+	}
+
+	public static String randomDate() {
+		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 	}
 }

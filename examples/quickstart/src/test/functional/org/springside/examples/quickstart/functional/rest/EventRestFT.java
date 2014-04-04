@@ -70,29 +70,29 @@ public class EventRestFT extends BaseFunctionalTestCase {
 	public void createUpdateAndDeleteTMEvent() {
 
 		// create
-		TMEvent TMEvent = TMEventData.randomEvent();
+		TMEvent event = TMEventData.randomEvent();
 //		TMEvent TMEvent = new TMEvent();
 
-		URI TMEventUri = restTemplate.postForLocation(resoureUrl, TMEvent);
-		System.out.println(TMEventUri.toString());
-		TMEvent createdTMEvent = restTemplate.getForObject(TMEventUri, TMEvent.class);
-//		assertEquals(TMEvent.getTitle(), createdTMEvent.getTitle());
+		URI eventUri = restTemplate.postForLocation(resoureUrl, event);
+		System.out.println(eventUri.toString());
+		TMEvent createdTMEvent = restTemplate.getForObject(eventUri, TMEvent.class);
+		assertEquals(event.getTitle(), createdTMEvent.getTitle());
 
 		// update
-		String id = StringUtils.substringAfterLast(TMEventUri.toString(), "/");
-		TMEvent.setId(new Long(id));
-//		TMEvent.setTitle(TMEventData.randomTitle());
+		String id = StringUtils.substringAfterLast(eventUri.toString(), "/");
+		event.setId(new Long(id));
+		event.setTitle(TMEventData.randomTitle());
 
-		restTemplate.put(TMEventUri, TMEvent);
+		restTemplate.put(eventUri, event);
 
-		TMEvent updatedTMEvent = restTemplate.getForObject(TMEventUri, TMEvent.class);
-//		assertEquals(TMEvent.getTitle(), updatedTMEvent.getTitle());
+		TMEvent updatedEvent = restTemplate.getForObject(eventUri, TMEvent.class);
+		assertEquals(event.getTitle(), updatedEvent.getTitle());
 
 		// delete
-		restTemplate.delete(TMEventUri);
+		restTemplate.delete(eventUri);
 
 		try {
-			restTemplate.getForObject(TMEventUri, TMEvent.class);
+			restTemplate.getForObject(eventUri, TMEvent.class);
 			fail("Get should fail while feth a deleted TMEvent");
 		} catch (HttpClientErrorException e) {
 			assertEquals(HttpStatus.NOT_FOUND, e.getStatusCode());
