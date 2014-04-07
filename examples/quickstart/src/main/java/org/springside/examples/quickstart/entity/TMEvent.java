@@ -61,7 +61,7 @@ public class TMEvent extends IdEntity {
 	/** 权重 */
 	private int weight;
 	/** 收藏 */
-	private List<TMBaseUser> startUsersList = Lists.newArrayList();
+	private List<TMTennisUser> startUsersList = Lists.newArrayList();
 	/** 发起者 */
 	private List<TMTennisUser> owner = Lists.newArrayList();
 	/** 参与者 */
@@ -197,20 +197,20 @@ public class TMEvent extends IdEntity {
 	@ManyToMany
 	@JoinTable(name = "tb_event_startuser", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = { @JoinColumn(name = "startuser_id") })
 	@Fetch(value = FetchMode.SUBSELECT)
-	@OrderBy(clause = "id desc")
+//	@OrderBy(clause = "id desc")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	public List<TMBaseUser> getStartUsersList() {
+	public List<TMTennisUser> getStartUsersList() {
 		return startUsersList;
 	}
 
-	public void setStartUsersList(List<TMBaseUser> startUsersList) {
+	public void setStartUsersList(List<TMTennisUser> startUsersList) {
 		this.startUsersList = startUsersList;
 	}
 
 	@ManyToMany
 	@JoinTable(name = "tb_event_owner", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = { @JoinColumn(name = "owner_id") })
 	@Fetch(value = FetchMode.SUBSELECT)
-	@OrderBy(clause = " id desc")
+//	@OrderBy(clause = " id desc")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	public List<TMTennisUser> getOwner() {
 		return owner;
@@ -223,7 +223,7 @@ public class TMEvent extends IdEntity {
 	@ManyToMany
 	@JoinTable(name = "tb_event_partake", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = { @JoinColumn(name = "partake_id") })
 	@Fetch(value = FetchMode.SUBSELECT)
-	@OrderBy(clause = " id desc")
+//	@OrderBy(clause = " id desc")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	public List<TMTennisUser> getParticipant() {
 		return participant;
@@ -236,7 +236,7 @@ public class TMEvent extends IdEntity {
 	@ManyToMany
 	@JoinTable(name = "tb_event_court", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = { @JoinColumn(name = "court_id") })
 	@Fetch(value = FetchMode.SUBSELECT)
-	@OrderBy(clause = "id desc")
+//	@OrderBy(clause = "id desc")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	public List<TMCourt> getCourtList() {
 		return courtList;
@@ -249,7 +249,7 @@ public class TMEvent extends IdEntity {
 	@ManyToMany
 	@JoinTable(name = "tb_event_evaluate", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = { @JoinColumn(name = "evaluate_id") })
 	@Fetch(value = FetchMode.SUBSELECT)
-	@OrderBy(clause = "id desc")
+//	@OrderBy(clause = "id desc")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	public List<TMEvaluate> getComments() {
 		return comments;

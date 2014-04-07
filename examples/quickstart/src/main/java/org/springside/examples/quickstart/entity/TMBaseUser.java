@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -32,6 +34,7 @@ import com.google.common.collect.Lists;
  */
 @Entity
 @Table(name = "tb_base_user")
+@Inheritance(strategy=InheritanceType.JOINED)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class TMBaseUser extends IdEntity {
 
@@ -95,7 +98,7 @@ public class TMBaseUser extends IdEntity {
 	}
 
 	@ManyToMany
-	@JoinTable(name = "user_group_tb", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "group_id") })
+	@JoinTable(name = "tb_user_group", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "group_id") })
 	@Fetch(value = FetchMode.SUBSELECT)
 	@OrderBy(clause = " id desc ")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)

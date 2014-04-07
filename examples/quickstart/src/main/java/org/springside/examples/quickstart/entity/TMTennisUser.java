@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -15,7 +16,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.OrderBy;
-import org.springside.examples.quickstart.data.TMBaseUserData;
+
 
 import com.google.common.collect.Lists;
 
@@ -25,11 +26,12 @@ import com.google.common.collect.Lists;
  */
 @Entity
 @Table(name = "tb_tennis_user")
+@PrimaryKeyJoinColumn(name="id")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class TMTennisUser extends TMBaseUser {
 
 	/** 和baseuser关联一对一 */
-    private long userId;
+//    private long userId;
     /** 年龄 */
     private int age;
     /** 地址 */
@@ -65,16 +67,16 @@ public class TMTennisUser extends TMBaseUser {
     /** 好友印象 */
     private List<TMEvaluate> friendsImpression= Lists.newArrayList();
     /**  */
-    private List<TMFileStore> imageList = Lists.newArrayList();
+    private List<TMImage> imageList = Lists.newArrayList();
 	
 
-	public long getUserId() {
-		return userId;
-	}
-
-	public void setUserId(long userId) {
-		this.userId = userId;
-	}
+//	public long getUserId() {
+//		return userId;
+//	}
+//
+//	public void setUserId(long userId) {
+//		this.userId = userId;
+//	}
 
 	public int getAge() {
 		return age;
@@ -213,7 +215,7 @@ public class TMTennisUser extends TMBaseUser {
 	@ManyToMany
 	@JoinTable(name = "tb_user_friends", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "evaluate_id") })
 	@Fetch(value = FetchMode.SUBSELECT)
-	@OrderBy(clause = "id desc")
+//	@OrderBy(clause = "id desc")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	public List<TMEvaluate> getFriendsImpression() {
 		return friendsImpression;
@@ -224,15 +226,15 @@ public class TMTennisUser extends TMBaseUser {
 	}
 
 	@ManyToMany
-	@JoinTable(name = "user_image_tb", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "image_id") })
+	@JoinTable(name = "tb_user_image", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "image_id") })
 	@Fetch(value = FetchMode.SUBSELECT)
-	@OrderBy(clause = "id desc")
+//	@OrderBy(clause = "id desc")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	public List<TMFileStore> getImageList() {
+	public List<TMImage> getImageList() {
 		return imageList;
 	}
 
-	public void setImageList(List<TMFileStore> imageList) {
+	public void setImageList(List<TMImage> imageList) {
 		this.imageList = imageList;
 	}
 

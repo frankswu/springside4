@@ -29,6 +29,8 @@ import com.google.common.collect.Lists;
 @Table(name = "tb_court")
 public class TMCourt extends IdEntity {
 
+    /** 场地名称 */
+	private String title;
     /** 场地地址 */
     private String address;
     /** 城市id TODO 城市和区县，可以用一张表 */
@@ -50,7 +52,7 @@ public class TMCourt extends IdEntity {
     /** 评价 */
     private List<TMEvaluate> evaluates = Lists.newArrayList();
     /** 图片 */
-    private List<TMFileStore> imageList = Lists.newArrayList();
+    private List<TMImage> imageList = Lists.newArrayList();
     /** 权重 */
     private String weights;
     /** 经度 */
@@ -159,11 +161,11 @@ public class TMCourt extends IdEntity {
 	@Fetch(value=FetchMode.SUBSELECT)
 	@OrderBy(clause="id desc")
 	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
-	public List<TMFileStore> getImageList() {
+	public List<TMImage> getImageList() {
 		return imageList;
 	}
 
-	public void setImageList(List<TMFileStore> imageList) {
+	public void setImageList(List<TMImage> imageList) {
 		this.imageList = imageList;
 	}
 
@@ -213,4 +215,14 @@ public class TMCourt extends IdEntity {
 		this.district = district;
 	}
 
+	@NotBlank
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	
 }

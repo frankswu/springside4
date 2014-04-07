@@ -30,18 +30,17 @@ import org.springside.modules.beanvalidator.BeanValidators;
 /**
  * TMEvent的Restful API的Controller.
  * <br>
- * List page : GET /api/v1/TMEvent/ <br>
- * get one: GET /api/v1/TMEvent/{id} <br>
- * Create page : GET /api/v1/TMEvent/create <br>
- * Create action : POST /api/v1/TMEvent/create <br>
- * Update page : GET /api/v1/TMEvent/update/{id} <br>
- * Update action : POST /api/v1/TMEvent/update <br>
- * Delete action : GET /api/v1/TMEvent/delete/{id}
+ * List page : GET /api/v1/event/ <br>
+ * get one: GET /api/v1/event/{id} <br>
+ * Create page : GET /api/v1/event/create <br>
+ * Create action : POST /api/v1/event/ <br>
+ * Update action : PUT /api/v1/event/{id} <br>
+ * Delete action : GET /api/v1/event/delete/{id}
  * 
  * @author calvin
  */
 @Controller
-@RequestMapping(value = "/api/v1/TMEvent")
+@RequestMapping(value = "/api/v1/event")
 public class EventRestController {
 
 	private static Logger logger = LoggerFactory.getLogger(EventRestController.class);

@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "group_tb")
+@Table(name = "tb_group")
 public class TMGroup extends IdEntity {
 
 	private String groupName;
