@@ -1,5 +1,5 @@
-drop table if exists ss_task;
-drop table if exists ss_user;
+-- drop table if exists ss_task;
+-- drop table if exists ss_user;
 
 drop table if exists tb_base_city;
 drop table if exists tb_base_enum;
@@ -214,10 +214,8 @@ create table tb_tennis_user (
     integral varchar(255) null,
     last_Login_Date varchar(255) null,
     personal_Info bigint  null,
-    gender bigint  null,
     account_Level varchar(255) null,
     birthday varchar(255) null,
-    state bigint  null,
     tennis_Age int(11)  null,
     phone varchar(255) null,
     address varchar(255) null,

@@ -18,6 +18,8 @@ insert into tb_event
 insert into tb_event_owner (event_id,owner_id)
 values (1,1);
 
+
+
 insert into tb_event_partake (event_id,partake_id)
 values (1,2);
 
@@ -46,16 +48,35 @@ insert into tb_base_user (id,`account`,`name`,`password`,`roles`,`register_date`
 values (2,'account','name','password','roles','2014-04-04 02:00:00');
  
 
-insert into tb_tennis_user (id,`user_id`,`age`,`address`,`birthday`,`gender`,`phote`,`phone`,`email`,`tennis_age`,`tennis_level`,`personal_info`,`login_times`,`last_login_date`,`device_flag`,`state`,`integral`,`account_level`)
-values (1,1,0,'address','birthday',1,'phote','phone','email',0,0,0,0,'lastLoginDate','deviceFlag',1,'integral','accountLevel');
+insert into tb_tennis_user (id,`user_id`,`age`,`address`,`birthday`,`gender_id`,`phote`,`phone`,`email`,`tennis_age`,`tennis_level`,`personal_info`,`login_times`,`last_login_date`,`device_flag`,`state_id`,`integral`,`account_level`)
+values (1,1,0,'address','birthday',4,'phote','phone','email',0,0,0,0,'lastLoginDate','deviceFlag',6,'integral','accountLevel');
  
-insert into tb_tennis_user (id,`user_id`,`age`,`address`,`birthday`,`gender`,`phote`,`phone`,`email`,`tennis_age`,`tennis_level`,`personal_info`,`login_times`,`last_login_date`,`device_flag`,`state`,`integral`,`account_level`)
-values (2,2,0,'address','birthday',2,'phote','phone','email',0,0,0,0,'lastLoginDate','deviceFlag',2,'integral','accountLevel');
+insert into tb_tennis_user (id,`user_id`,`age`,`address`,`birthday`,`gender_id`,`phote`,`phone`,`email`,`tennis_age`,`tennis_level`,`personal_info`,`login_times`,`last_login_date`,`device_flag`,`state_id`,`integral`,`account_level`)
+values (2,2,0,'address','birthday',5,'phote','phone','email',0,0,0,0,'lastLoginDate','deviceFlag',7,'integral','accountLevel');
  
+insert into tb_base_enum (id,`enum_type`,`enum_value`,`enum_desc`)
+values (4,'user_gender','man','man');
+insert into tb_base_enum (id,`enum_type`,`enum_value`,`enum_desc`)
+values (5,'user_gender','women','women');
+ 
+insert into tb_base_enum (id,`enum_type`,`enum_value`,`enum_desc`)
+values (6,'user_state','0','在线');
+insert into tb_base_enum (id,`enum_type`,`enum_value`,`enum_desc`)
+values (7,'user_state','1','不在线');
+insert into tb_base_enum (id,`enum_type`,`enum_value`,`enum_desc`)
+values (8,'user_state','2','黑名单');
+
 
 
 insert into tb_court (id,`address`,`city_id`,`district_id`,`phone`,`start_time`,`end_time`,`fee`,`court_desc`,`court_count`,`weights`,`longitude`,`latitude`)
-values (1,'address',0,0,'phone','2014-04-04 02:00:00','2014-04-04 02:00:00','fee','courtDesc','courtCount','weights',0,0);
+values (1,'address',1,2,'phone','2014-04-04 02:00:00','2014-04-04 02:00:00','fee','courtDesc','courtCount','weights',0,0);
+
+insert into tb_base_city (id,city_name,city_type)
+values(1,'上海','province');
+insert into tb_base_city (id,city_name,city_type)
+values(2,'长宁区','municipality');
+
+
  
 insert into tb_evaluate (id,`evaluate`,`score`,category_id)
 values (1,'evaluate',34,3);

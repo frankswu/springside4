@@ -17,6 +17,7 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.OrderBy;
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Lists;
 
 /**
@@ -49,39 +50,16 @@ public class TMCourt extends IdEntity {
     private String courtDesc;
     /** 场地片数 */
     private String courtCount;
-    /** 评价 */
-    private List<TMEvaluate> evaluates = Lists.newArrayList();
-    /** 图片 */
-    private List<TMImage> imageList = Lists.newArrayList();
     /** 权重 */
     private String weights;
     /** 经度 */
     private double longitude;
     /** 纬度 */
     private double latitude;
-//
-//	// private String courtId;// 场地id
-//	private String address;// 场地地址
-//	private TMBaseCity city;// 城市id
-//	private TMBaseCity district;// 区县id
-//	private String phone;// 联系电话 可能有多个 用|分割 eg: 18000000|1388888888
-//	private String startTime;// 开始时间
-//	private String endTime;// 结束时间
-//	private String fee;// 收费标准
-//	private String courtDesc;// 场地情况
-//	private String courtCount;// 场地片数
-//	// 应该是评价模型的列表List<Evaluate>,评分也在里面
-//	private List<TMEvaluate> evaluates = Lists.newArrayList();// 评价
-//
-//	// private String score;// 评分
-//	/**
-//	 * 图片
-//	 */
-//	private List<TMFileStore> imageList;
-//	// 没有理解权重的意思
-//	private String weights;// 权重
-//	private double longitude;// 经度
-//	private double latitude;// 纬度
+    /** 评价 */
+    private List<TMEvaluate> evaluates = Lists.newArrayList();
+    /** 图片 */
+    private List<TMImage> imageList = Lists.newArrayList();
 
 	@NotBlank
 	public String getAddress() {
@@ -142,32 +120,6 @@ public class TMCourt extends IdEntity {
 		this.courtCount = courtCount;
 	}
 
-	@ManyToMany
-	@JoinTable(name="tb_court_evaluate",joinColumns={@JoinColumn(name="court_id")},inverseJoinColumns={@JoinColumn(name="evaluate_id")})
-	@Fetch(value=FetchMode.SUBSELECT)
-	@OrderBy(clause="id desc")
-	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
-	public List<TMEvaluate> getEvaluates() {
-		return evaluates;
-	}
-
-	public void setEvaluates(List<TMEvaluate> evaluates) {
-		this.evaluates = evaluates;
-	}
-
-	
-	@ManyToMany
-	@JoinTable(name="tb_court_images",joinColumns={@JoinColumn(name="court_id")},inverseJoinColumns={@JoinColumn(name="image_id")})
-	@Fetch(value=FetchMode.SUBSELECT)
-	@OrderBy(clause="id desc")
-	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
-	public List<TMImage> getImageList() {
-		return imageList;
-	}
-
-	public void setImageList(List<TMImage> imageList) {
-		this.imageList = imageList;
-	}
 
 	public String getWeights() {
 		return weights;
@@ -224,5 +176,33 @@ public class TMCourt extends IdEntity {
 		this.title = title;
 	}
 
+	@ManyToMany
+	@JoinTable(name="tb_court_evaluate",joinColumns={@JoinColumn(name="court_id")},inverseJoinColumns={@JoinColumn(name="evaluate_id")})
+	@Fetch(value=FetchMode.SUBSELECT)
+	@OrderBy(clause="id desc")
+	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
+	@JsonIgnore
+	public List<TMEvaluate> getEvaluates() {
+		return evaluates;
+	}
+
+	public void setEvaluates(List<TMEvaluate> evaluates) {
+		this.evaluates = evaluates;
+	}
+
+	
+	@ManyToMany
+	@JoinTable(name="tb_court_images",joinColumns={@JoinColumn(name="court_id")},inverseJoinColumns={@JoinColumn(name="image_id")})
+	@Fetch(value=FetchMode.SUBSELECT)
+	@OrderBy(clause="id desc")
+	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
+	@JsonIgnore
+	public List<TMImage> getImageList() {
+		return imageList;
+	}
+
+	public void setImageList(List<TMImage> imageList) {
+		this.imageList = imageList;
+	}
 	
 }

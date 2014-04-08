@@ -100,7 +100,7 @@ public class TMBaseUser extends IdEntity {
 	@ManyToMany
 	@JoinTable(name = "tb_user_group", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "group_id") })
 	@Fetch(value = FetchMode.SUBSELECT)
-	@OrderBy(clause = " id desc ")
+//	@OrderBy(clause = " id desc ")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	public List<TMGroup> getGroupList() {
 		return groupList;

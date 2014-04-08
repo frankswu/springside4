@@ -17,7 +17,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.OrderBy;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Lists;
 
 /**
@@ -217,6 +217,7 @@ public class TMTennisUser extends TMBaseUser {
 	@Fetch(value = FetchMode.SUBSELECT)
 //	@OrderBy(clause = "id desc")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+	@JsonIgnore
 	public List<TMEvaluate> getFriendsImpression() {
 		return friendsImpression;
 	}
@@ -230,6 +231,7 @@ public class TMTennisUser extends TMBaseUser {
 	@Fetch(value = FetchMode.SUBSELECT)
 //	@OrderBy(clause = "id desc")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+	@JsonIgnore
 	public List<TMImage> getImageList() {
 		return imageList;
 	}
