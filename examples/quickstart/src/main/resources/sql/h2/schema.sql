@@ -79,7 +79,7 @@ create table tb_base_enum (
     primary key (id)
 ) ;
 
---基础用户
+--  基础用户
 
 
 
@@ -94,7 +94,7 @@ create table tb_base_user (
     primary key (id)
 ) ;
 
---球场
+-- 球场
 
 
 create table tb_court (
