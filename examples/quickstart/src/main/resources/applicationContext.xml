@@ -30,6 +30,7 @@
 				<!-- 命名规则 My_NAME->MyName -->
 				<prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
 				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
+				<prop key="hibernate.show_sql">true</prop>
 			</props>
 		</property>
 	</bean>
@@ -76,6 +77,7 @@
 			<!-- 连接Idle一个小时后超时 -->
 			<property name="timeBetweenEvictionRunsMillis" value="3600000" />
 			<property name="minEvictableIdleTimeMillis" value="3600000" />
+<!-- 			<property name="show_sql" value="true"/> -->
 		</bean>
 		
 		<!-- 数据源配置,使用应用服务器的数据库连接池 -->

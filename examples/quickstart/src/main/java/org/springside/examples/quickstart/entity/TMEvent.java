@@ -15,7 +15,6 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.OrderBy;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.google.common.collect.Lists;
@@ -197,7 +196,7 @@ public class TMEvent extends IdEntity {
 	@ManyToMany
 	@JoinTable(name = "tb_event_startuser", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = { @JoinColumn(name = "startuser_id") })
 	@Fetch(value = FetchMode.SUBSELECT)
-//	@OrderBy(clause = "id desc")
+	// @OrderBy(clause = "id desc")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	public List<TMTennisUser> getStartUsersList() {
 		return startUsersList;
@@ -210,7 +209,7 @@ public class TMEvent extends IdEntity {
 	@ManyToMany
 	@JoinTable(name = "tb_event_owner", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = { @JoinColumn(name = "owner_id") })
 	@Fetch(value = FetchMode.SUBSELECT)
-//	@OrderBy(clause = " id desc")
+	// @OrderBy(clause = " id desc")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	public List<TMTennisUser> getOwner() {
 		return owner;
@@ -223,7 +222,7 @@ public class TMEvent extends IdEntity {
 	@ManyToMany
 	@JoinTable(name = "tb_event_partake", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = { @JoinColumn(name = "partake_id") })
 	@Fetch(value = FetchMode.SUBSELECT)
-//	@OrderBy(clause = " id desc")
+	// @OrderBy(clause = " id desc")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	public List<TMTennisUser> getParticipant() {
 		return participant;
@@ -236,7 +235,7 @@ public class TMEvent extends IdEntity {
 	@ManyToMany
 	@JoinTable(name = "tb_event_court", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = { @JoinColumn(name = "court_id") })
 	@Fetch(value = FetchMode.SUBSELECT)
-//	@OrderBy(clause = "id desc")
+	// @OrderBy(clause = "id desc")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	public List<TMCourt> getCourtList() {
 		return courtList;
@@ -249,7 +248,7 @@ public class TMEvent extends IdEntity {
 	@ManyToMany
 	@JoinTable(name = "tb_event_evaluate", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = { @JoinColumn(name = "evaluate_id") })
 	@Fetch(value = FetchMode.SUBSELECT)
-//	@OrderBy(clause = "id desc")
+	// @OrderBy(clause = "id desc")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	public List<TMEvaluate> getComments() {
 		return comments;

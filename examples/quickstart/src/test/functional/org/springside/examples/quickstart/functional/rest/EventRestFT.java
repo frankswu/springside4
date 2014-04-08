@@ -49,6 +49,7 @@ public class EventRestFT extends BaseFunctionalTestCase {
 	public void listTMEvents() {
 		TMEventList TMEvents = restTemplate.getForObject(resoureUrl, TMEventList.class);
 		assertEquals(1, TMEvents.size());
+		TMEvents.get(0).getComments();
 		assertEquals("title", TMEvents.get(0).getTitle());
 	}
 
@@ -65,13 +66,13 @@ public class EventRestFT extends BaseFunctionalTestCase {
 	/**
 	 * 创建/更新/删除任务.
 	 */
-	@Test
-	@Category(Smoke.class)
+	// @Test
+	// @Category(Smoke.class)
 	public void createUpdateAndDeleteTMEvent() {
 
 		// create
 		TMEvent event = TMEventData.randomEvent();
-//		TMEvent TMEvent = new TMEvent();
+		// TMEvent TMEvent = new TMEvent();
 
 		URI eventUri = restTemplate.postForLocation(resoureUrl, event);
 		System.out.println(eventUri.toString());
@@ -99,7 +100,7 @@ public class EventRestFT extends BaseFunctionalTestCase {
 		}
 	}
 
-//	@Test
+	// @Test
 	public void invalidCreateInput() {
 
 		// create
@@ -116,7 +117,7 @@ public class EventRestFT extends BaseFunctionalTestCase {
 
 	}
 
-//	@Test
+	// @Test
 	public void invalidUpdateInput() {
 		TMEvent titleBlankTMEvent = new TMEvent();
 		// update

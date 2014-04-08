@@ -2,12 +2,14 @@ package org.springside.examples.quickstart.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * 评价model
@@ -22,7 +24,7 @@ public class TMEvaluate extends IdEntity {
 	private String evaluate;// 评价
 	private double score;// 评分
 
-	/**	  评论分类	 */
+	/** 评论分类 */
 	private TMBaseEnum evaluateCategory;
 
 	@NotBlank
@@ -46,14 +48,22 @@ public class TMEvaluate extends IdEntity {
 	@NotNull
 	@OneToOne
 	@JoinColumn(name = "category_id")
+	@JsonIgnore
 	public TMBaseEnum getEvaluateCategory() {
 		return evaluateCategory;
+	}
+
+	@Transient
+	public String getCategory() {
+		return evaluateCategory.getEnumValue();
+	}
+
+	public void setCategory(String categroy) {
+		// return evaluateCategory.getEnumValue();
 	}
 
 	public void setEvaluateCategory(TMBaseEnum evaluateCategory) {
 		this.evaluateCategory = evaluateCategory;
 	}
-
-
 
 }

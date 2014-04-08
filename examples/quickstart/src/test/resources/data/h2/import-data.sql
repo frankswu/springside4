@@ -15,23 +15,23 @@ insert into tb_event
 (id,`title`,`descrition`,`phone`,`totol_price`,`require`,`commit_time`,`event_time`,`address`,`longitude`,`latitude`,`remark`,`category_id`,`statues`,`weight`) values 
 (1,'title','descrition','phone',0,'require','2014-04-04 02:00:00','2014-04-04 02:00:00','address',0,0,'remark',1,2,0);
 
-insert into tb_event_owner (id,event_id,owner_id)
-values (1,1,1);
+insert into tb_event_owner (event_id,owner_id)
+values (1,1);
 
-insert into tb_event_partake (id,event_id,partake_id)
-values (1,1,2);
+insert into tb_event_partake (event_id,partake_id)
+values (1,2);
 
-insert into tb_event_startuser (id,event_id,startuser_id)
-values (1,1,1);
+insert into tb_event_startuser (event_id,startuser_id)
+values (1,1);
 
-insert into tb_event_court (id,event_id,court_id)
-values (1,1,1);
+insert into tb_event_court (event_id,court_id)
+values (1,1);
 
-insert into tb_event_evaluate (id,event_id,evaluate_id)
-values (1,1,1);
+insert into tb_event_evaluate (event_id,evaluate_id)
+values (1,1);
 
-insert into tb_event_evaluate (id,event_id,evaluate_id)
-values (2,1,2);
+insert into tb_event_evaluate (event_id,evaluate_id)
+values (1,2);
 
 insert into tb_base_enum (id,`enum_type`,`enum_value`,`enum_desc`)
 values (1,'enumsdfType','enumdsffValue','enumDssesc');
@@ -58,10 +58,13 @@ insert into tb_court (id,`address`,`city_id`,`district_id`,`phone`,`start_time`,
 values (1,'address',0,0,'phone','2014-04-04 02:00:00','2014-04-04 02:00:00','fee','courtDesc','courtCount','weights',0,0);
  
 insert into tb_evaluate (id,`evaluate`,`score`,category_id)
-values (1,'evaluate',34,0);
+values (1,'evaluate',34,3);
 
 insert into tb_evaluate (id,`evaluate`,`score`,category_id)
-values (2,'evaluate',4,0);
+values (2,'evaluate',4,3);
+
+insert into tb_base_enum (id,`enum_type`,`enum_value`,`enum_desc`)
+values (3,'evaluatetype','evaluatetype1','evaluatetype1');
 
 
 
