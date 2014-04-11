@@ -19,10 +19,7 @@ create table ss_user (
 	register_date timestamp not null default 0,
 	primary key (id)
 ) engine=InnoDB;
-drop table if exists ss_task;
-drop table if exists ss_user;
 */
-
 drop table if exists ss_task;
 drop table if exists ss_user;
 
@@ -41,10 +38,7 @@ drop table if exists tb_tennis_user;
 drop table if exists tb_base_user;
 drop table if exists tb_group;
 drop table if exists tb_user_group;
-drop table if exists tb_court_images;
-drop table if exists tb_court_evaluate;
-drop table if exists tb_user_friends;
-drop table if exists tb_user_image;
+
 
 create table ss_task (
 	id bigint auto_increment,
@@ -67,7 +61,7 @@ create table ss_user (
 
 
 
---  frankswu 
+-- frankswu 
 
 
 create table tb_group (
@@ -78,12 +72,13 @@ create table tb_group (
 ) engine=InnoDB;
 
 create table tb_user_group (
+    id bigint auto_increment,
     user_id bigint  not null,
     group_id bigint not null,
-    primary key (user_id,group_id)
+    primary key (id)
 ) engine=InnoDB;
 
--- 	基础城市或地址 
+--	基础城市或地址 
 
 
 create table tb_base_city (
@@ -93,7 +88,7 @@ create table tb_base_city (
     primary key (id)
 ) engine=InnoDB;
 
---  基础枚举数据表
+-- 基础枚举数据表
 
 
 create table tb_base_enum (
@@ -104,7 +99,7 @@ create table tb_base_enum (
     primary key (id)
 ) engine=InnoDB;
 
--- 基础用户
+--基础用户
 
 
 
@@ -119,7 +114,7 @@ create table tb_base_user (
     primary key (id)
 ) engine=InnoDB;
 
--- 球场
+--球场
 
 
 create table tb_court (
@@ -141,9 +136,10 @@ create table tb_court (
 ) engine=InnoDB;
 
 create table tb_court_images (
+    id bigint auto_increment,
     court_id bigint  not null,
     image_id bigint not null,
-    primary key (court_id,image_id)
+    primary key (id)
 ) engine=InnoDB;
 
 create table tb_court_evaluate (
@@ -153,7 +149,7 @@ create table tb_court_evaluate (
     primary key (id)
 ) engine=InnoDB;
 
---  评价model
+-- 评价model
 
 create table tb_evaluate (
 	id bigint auto_increment,
@@ -164,26 +160,28 @@ create table tb_evaluate (
 ) engine=InnoDB;
 
 create table tb_event_evaluate (
+    id bigint auto_increment,
     event_id bigint  not null,
     evaluate_id bigint not null,
-    primary key (event_id,evaluate_id)
+    primary key (id)
 ) engine=InnoDB;
 
--- 
+--
 
 
 create table tb_event (
 	id bigint auto_increment,
     event_Time TIMESTAMP  null,
     commit_Time TIMESTAMP  null,
-    `require` varchar(255) null,
+    require varchar(255) null,
     category_id bigint  null,
     statues bigint null,
     address varchar(255) null,
     totol_Price double(10,8)  null,
     phone varchar(255) null,
     latitude double(10,8)  null,
-    longitude double(10,8)  null,
+    longitude 
+  null,
     descrition varchar(255) null,
     remark varchar(255) null,
     title varchar(255)  null,
@@ -195,31 +193,35 @@ create table tb_event (
 
 
 create table tb_event_owner (
+    id bigint auto_increment,
     event_id bigint  not null,
     owner_id bigint not null,
-    primary key (event_id,owner_id)
+    primary key (id)
 ) engine=InnoDB;
 
 
 create table tb_event_partake (
+    id bigint auto_increment,
     event_id bigint  not null,
     partake_id bigint not null,
-    primary key (event_id,partake_id)
+    primary key (id)
 ) engine=InnoDB;
 
 create table tb_event_court (
+    id bigint auto_increment,
     event_id bigint  not null,
     court_id bigint not null,
-    primary key (event_id,court_id)
+    primary key (id)
 ) engine=InnoDB;
 
 create table tb_event_startuser (
+    id bigint auto_increment,
     event_id bigint  not null,
     startuser_id bigint not null,
-    primary key (event_id,startuser_id)
+    primary key (id)
 ) engine=InnoDB;
 
---  文件存储
+-- 文件存储
 
 
 create table tb_file_store (
@@ -230,7 +232,7 @@ create table tb_file_store (
     primary key (id)
 ) engine=InnoDB;
 
---  球友
+-- 球友
 
 
 create table tb_tennis_user (
@@ -239,8 +241,10 @@ create table tb_tennis_user (
     integral varchar(255) null,
     last_Login_Date varchar(255) null,
     personal_Info bigint  null,
+    gender bigint  null,
     account_Level varchar(255) null,
     birthday varchar(255) null,
+    state bigint  null,
     tennis_Age int(11)  null,
     phone varchar(255) null,
     address varchar(255) null,
@@ -256,14 +260,16 @@ create table tb_tennis_user (
 ) engine=InnoDB;
 
 create table tb_user_friends (
+    id bigint auto_increment,
     user_id bigint  not null,
     evaluate_id bigint not null,
-    primary key (user_id,evaluate_id)
+    primary key (id)
 ) engine=InnoDB;
 
 create table tb_user_image (
+    id bigint auto_increment,
     user_id bigint  not null,
     image_id bigint not null,
-    primary key (user_id,image_id)
+    primary key (id)
 ) engine=InnoDB;
 
