@@ -24,8 +24,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springside.examples.quickstart.entity.TMEvent;
+import org.springside.examples.quickstart.restdto.EventDTO;
 import org.springside.examples.quickstart.service.tennis.EventService;
 import org.springside.modules.beanvalidator.BeanValidators;
+import org.springside.modules.mapper.BeanMapper;
 
 /**
  * TMEvent的Restful API的Controller.
@@ -53,8 +55,8 @@ public class EventRestController {
 
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public List<TMEvent> list() {
-		return EventService.getAllTMEvent();
+	public List<EventDTO> list() {
+		return BeanMapper.mapList( EventService.getAllTMEvent(),EventDTO.class);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

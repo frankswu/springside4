@@ -9,6 +9,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
@@ -16,7 +17,10 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springside.examples.quickstart.restdto.TennisUserDTO;
+import org.springside.modules.mapper.BeanMapper;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Lists;
 
 /**
@@ -60,7 +64,7 @@ public class TMEvent extends IdEntity {
 	/** 权重 */
 	private int weight;
 	/** 收藏 */
-	private List<TMTennisUser> startUsersList = Lists.newArrayList();
+	private List<TMTennisUser> startUsers = Lists.newArrayList();
 	/** 发起者 */
 	private List<TMTennisUser> owner = Lists.newArrayList();
 	/** 参与者 */
@@ -113,6 +117,7 @@ public class TMEvent extends IdEntity {
 		this.require = require;
 	}
 
+	
 	public Date getCommitTime() {
 		return commitTime;
 	}
@@ -198,12 +203,20 @@ public class TMEvent extends IdEntity {
 	@Fetch(value = FetchMode.SUBSELECT)
 	// @OrderBy(clause = "id desc")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	public List<TMTennisUser> getStartUsersList() {
-		return startUsersList;
+	@JsonIgnore
+	public List<TMTennisUser> getStartUsers() {
+		return startUsers;
 	}
+	
+	@Transient
+	public List<TennisUserDTO> getStartUsersList() {
+		List<TennisUserDTO> userDTOList = BeanMapper.mapList(startUsers, TennisUserDTO.class);
+		return userDTOList;
+	}
+	
 
-	public void setStartUsersList(List<TMTennisUser> startUsersList) {
-		this.startUsersList = startUsersList;
+	public void setStartUsers(List<TMTennisUser> startUsersList) {
+		this.startUsers = startUsersList;
 	}
 
 	@ManyToMany

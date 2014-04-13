@@ -9,13 +9,15 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.OrderBy;
+import org.springside.examples.quickstart.restdto.TennisUserDTO;
+import org.springside.modules.mapper.BeanMapper;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Lists;
@@ -67,7 +69,7 @@ public class TMTennisUser extends TMBaseUser {
     /** 好友印象 */
     private List<TMEvaluate> friendsImpression= Lists.newArrayList();
     /**  */
-    private List<TMImage> imageList = Lists.newArrayList();
+    private List<TMImage> images = Lists.newArrayList();
 	
 
 //	public long getUserId() {
@@ -212,10 +214,17 @@ public class TMTennisUser extends TMBaseUser {
 	public void setState(TMBaseEnum state) {
 		this.state = state;
 	}
+	
+    /** get 好友印象 */
+	@Transient
+	public List<TennisUserDTO> getFriendsImpressionList() {
+		List<TennisUserDTO> tennisuserDTOList = BeanMapper.mapList(friendsImpression, TennisUserDTO.class);
+		return tennisuserDTOList;
+	}
+	
 	@ManyToMany
 	@JoinTable(name = "tb_user_friends", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "evaluate_id") })
 	@Fetch(value = FetchMode.SUBSELECT)
-//	@OrderBy(clause = "id desc")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	@JsonIgnore
 	public List<TMEvaluate> getFriendsImpression() {
@@ -226,18 +235,27 @@ public class TMTennisUser extends TMBaseUser {
 		this.friendsImpression = friendsImpression;
 	}
 
+    /** get 照片 */
+	@Transient
+	public List<TennisUserDTO> getImagesList() {
+		List<TennisUserDTO> tennisuserDTOList = BeanMapper.mapList(images, TennisUserDTO.class);
+		return tennisuserDTOList;
+	}
+
 	@ManyToMany
 	@JoinTable(name = "tb_user_image", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "image_id") })
 	@Fetch(value = FetchMode.SUBSELECT)
 //	@OrderBy(clause = "id desc")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	@JsonIgnore
-	public List<TMImage> getImageList() {
-		return imageList;
+	public List<TMImage> getImages() {
+		return images;
 	}
 
-	public void setImageList(List<TMImage> imageList) {
-		this.imageList = imageList;
+	public void setImages(List<TMImage> imageList) {
+		this.images = imageList;
 	}
+	
+	
 
 }
