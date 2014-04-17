@@ -5,6 +5,8 @@ package org.springside.examples.quickstart.restdto;
 import org.springside.examples.quickstart.entity.TMBaseEnum;
 import org.springside.modules.mapper.BeanMapper;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 public class EvaluateDTO {
@@ -51,10 +53,12 @@ public class EvaluateDTO {
     	this.score = score;
     }
     
+    @JsonIgnore
     public Long getCategoryModelId(){
     	return this.categoryModel.getId();
     }
 
+    @JsonIgnore
     public BaseEnumDTO getCategoryModelDTO(){
     	return BeanMapper.map(this.categoryModel,BaseEnumDTO.class);
     }

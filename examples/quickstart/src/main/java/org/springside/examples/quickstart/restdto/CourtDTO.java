@@ -4,6 +4,8 @@ package org.springside.examples.quickstart.restdto;
 import org.springside.examples.quickstart.entity.TMBaseCity;
 import org.springside.modules.mapper.BeanMapper;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 public class CourtDTO {
@@ -146,11 +148,13 @@ public class CourtDTO {
     public void setLatitude(double latitude){
     	this.latitude = latitude;
     }
-    
+
+    @JsonIgnore
     public Long getCityModelId(){
     	return this.cityModel.getId();
     }
 
+    @JsonIgnore
     public BaseCityDTO getCityModelDTO(){
     	return BeanMapper.map(this.cityModel,BaseCityDTO.class);
     }
@@ -164,10 +168,12 @@ public class CourtDTO {
     	this.cityModel = cityModel;
     }
     
+    @JsonIgnore
     public Long getDistrictModelId(){
     	return this.districtModel.getId();
     }
 
+    @JsonIgnore
     public BaseCityDTO getDistrictModelDTO(){
     	return BeanMapper.map(this.districtModel,BaseCityDTO.class);
     }

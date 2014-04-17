@@ -1,6 +1,7 @@
 package org.springside.examples.quickstart.rest;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,7 +57,21 @@ public class EventRestController {
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public List<EventDTO> list() {
-		return BeanMapper.mapList( EventService.getAllTMEvent(),EventDTO.class);
+		List<EventDTO>  eventDtoList = new ArrayList<EventDTO>();
+		
+//		BeanMapper.mapList( EventService.getAllTMEvent(),EventDTO.class); 
+		for (TMEvent event : EventService.getAllTMEvent()) {
+			EventDTO dto = BeanMapper.map(event, EventDTO.class);
+			dto.setStartUsersModelList(event.getStartUsers());
+			dto.setOwnersModelList(event.getOwner());
+			dto.setParticipantModelList(event.getParticipant());
+			dto.setCourtsModelList(event.getCourtList());
+			dto.setEvaluatesModelList(event.getComments());
+			eventDtoList.add(dto);
+		}
+		
+		
+		return eventDtoList;
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
