@@ -1,325 +1,324 @@
-
 package org.springside.examples.quickstart.restdto;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springside.examples.quickstart.entity.TMBaseEnum;
 import org.springside.examples.quickstart.entity.TMCourt;
 import org.springside.examples.quickstart.entity.TMEvaluate;
 import org.springside.examples.quickstart.entity.TMTennisUser;
-import org.springside.modules.utils.Collections3;
 import org.springside.modules.mapper.BeanMapper;
+import org.springside.modules.utils.Collections3;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
-
 public class EventDTO {
 
-	
-    /**  */
-    private long id;
-    /** 标题 */
-    private String title;
-    /** 内容描述 */
-    private String descrition;
-    /** 电话 */
-    private String phone;
-    /** 费用 */
-    private double totolPrice;
-    /** 对手水平要求 */
-    private String require;
-    /** 发起时间 */
-    private String commitTime;
-    /** 活动时间 */
-    private String eventTime;
-    /** 地点 */
-    private String address;
-    /** 经度 */
-    private double longitude;
-    /** 纬度 */
-    private double latitude;
-    /** 备注 */
-    private String remark;
-    /** 权重 */
-    private int weight;
-    /** 分类 */
-    private TMBaseEnum categoryModel;
-    /** 状态：2审核中，1未完成，0已完成 */
-    private TMBaseEnum statuesModel;
-    /** 收藏 */
-    private List<TMTennisUser> startUsersModelList;
-    /**  // 发起者 */
-    private List<TMTennisUser> ownersModelList;
-    /**  // 参与者 */
-    private List<TMTennisUser> participantModelList;
-    /** 评论 */
-    private List<TMEvaluate> evaluatesModelList;
-    /** 场地 */
-    private List<TMCourt> courtsModelList;
+	/**  */
+	private long id;
+	/** 标题 */
+	private String title;
+	/** 内容描述 */
+	private String descrition;
+	/** 电话 */
+	private String phone;
+	/** 费用 */
+	private double totolPrice;
+	/** 对手水平要求 */
+	private String require;
+	/** 发起时间 */
+	private String commitTime;
+	/** 活动时间 */
+	private String eventTime;
+	/** 地点 */
+	private String address;
+	/** 经度 */
+	private double longitude;
+	/** 纬度 */
+	private double latitude;
+	/** 备注 */
+	private String remark;
+	/** 权重 */
+	private int weight;
+	/** 分类 */
+	private TMBaseEnum category;
+	/** 状态：2审核中，1未完成，0已完成 */
+	private TMBaseEnum statues;
+	/** 收藏 */
+	private List<TMTennisUser> startUsersModelList;
+	/** // 发起者 */
+	private List<TMTennisUser> ownersModelList;
+	/** // 参与者 */
+	private List<TMTennisUser> participantModelList;
+	/** 评论 */
+	private List<TMEvaluate> commentsModelList;
+	/** 场地 */
+	private List<TMCourt> courtsModelList;
 
+	/** get */
+	public long getId() {
+		return this.id;
+	}
 
-	
-    /** get  */
-    public long getId(){
-    	return this.id;
-    }
+	/** set */
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    /** set  */
-    public void setId(long id){
-    	this.id = id;
-    }
-    
-    /** get 标题 */
-    public String getTitle(){
-    	return this.title;
-    }
+	/** get 标题 */
+	public String getTitle() {
+		return this.title;
+	}
 
-    /** set 标题 */
-    public void setTitle(String title){
-    	this.title = title;
-    }
-    
-    /** get 内容描述 */
-    public String getDescrition(){
-    	return this.descrition;
-    }
+	/** set 标题 */
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    /** set 内容描述 */
-    public void setDescrition(String descrition){
-    	this.descrition = descrition;
-    }
-    
-    /** get 电话 */
-    public String getPhone(){
-    	return this.phone;
-    }
+	/** get 内容描述 */
+	public String getDescrition() {
+		return this.descrition;
+	}
 
-    /** set 电话 */
-    public void setPhone(String phone){
-    	this.phone = phone;
-    }
-    
-    /** get 费用 */
-    public double getTotolPrice(){
-    	return this.totolPrice;
-    }
+	/** set 内容描述 */
+	public void setDescrition(String descrition) {
+		this.descrition = descrition;
+	}
 
-    /** set 费用 */
-    public void setTotolPrice(double totolPrice){
-    	this.totolPrice = totolPrice;
-    }
-    
-    /** get 对手水平要求 */
-    public String getRequire(){
-    	return this.require;
-    }
+	/** get 电话 */
+	public String getPhone() {
+		return this.phone;
+	}
 
-    /** set 对手水平要求 */
-    public void setRequire(String require){
-    	this.require = require;
-    }
-    
-    /** get 发起时间 */
-    public String getCommitTime(){
-    	return this.commitTime;
-    }
+	/** set 电话 */
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
-    /** set 发起时间 */
-    public void setCommitTime(String commitTime){
-    	this.commitTime = commitTime;
-    }
-    
-    /** get 活动时间 */
-    public String getEventTime(){
-    	return this.eventTime;
-    }
+	/** get 费用 */
+	public double getTotolPrice() {
+		return this.totolPrice;
+	}
 
-    /** set 活动时间 */
-    public void setEventTime(String eventTime){
-    	this.eventTime = eventTime;
-    }
-    
-    /** get 地点 */
-    public String getAddress(){
-    	return this.address;
-    }
+	/** set 费用 */
+	public void setTotolPrice(double totolPrice) {
+		this.totolPrice = totolPrice;
+	}
 
-    /** set 地点 */
-    public void setAddress(String address){
-    	this.address = address;
-    }
-    
-    /** get 经度 */
-    public double getLongitude(){
-    	return this.longitude;
-    }
+	/** get 对手水平要求 */
+	public String getRequire() {
+		return this.require;
+	}
 
-    /** set 经度 */
-    public void setLongitude(double longitude){
-    	this.longitude = longitude;
-    }
-    
-    /** get 纬度 */
-    public double getLatitude(){
-    	return this.latitude;
-    }
+	/** set 对手水平要求 */
+	public void setRequire(String require) {
+		this.require = require;
+	}
 
-    /** set 纬度 */
-    public void setLatitude(double latitude){
-    	this.latitude = latitude;
-    }
-    
-    /** get 备注 */
-    public String getRemark(){
-    	return this.remark;
-    }
+	/** get 发起时间 */
+	public String getCommitTime() {
+		return this.commitTime;
+	}
 
-    /** set 备注 */
-    public void setRemark(String remark){
-    	this.remark = remark;
-    }
-    
-    /** get 权重 */
-    public int getWeight(){
-    	return this.weight;
-    }
+	/** set 发起时间 */
+	public void setCommitTime(String commitTime) {
+		this.commitTime = commitTime;
+	}
 
-    /** set 权重 */
-    public void setWeight(int weight){
-    	this.weight = weight;
-    }
-    
-    @JsonIgnore
-    public Long getCategoryModelId(){
-    	return this.categoryModel.getId();
-    }
+	/** get 活动时间 */
+	public String getEventTime() {
+		return this.eventTime;
+	}
 
-    @JsonIgnore
-    public BaseEnumDTO getCategoryModelDTO(){
-    	return BeanMapper.map(this.categoryModel,BaseEnumDTO.class);
-    }
-    /** get 分类 */
-    public TMBaseEnum getCategoryModel(){
-    	return this.categoryModel;
-    }
+	/** set 活动时间 */
+	public void setEventTime(String eventTime) {
+		this.eventTime = eventTime;
+	}
 
-    /** set 分类 */
-    public void setCategoryModel(TMBaseEnum categoryModel){
-    	this.categoryModel = categoryModel;
-    }
-    
-    @JsonIgnore
-    public Long getStatuesModelId(){
-    	return this.statuesModel.getId();
-    }
-    @JsonIgnore
-    public BaseEnumDTO getStatuesModelDTO(){
-    	return BeanMapper.map(this.statuesModel,BaseEnumDTO.class);
-    }
-    /** get 状态：2审核中，1未完成，0已完成 */
-    public TMBaseEnum getStatuesModel(){
-    	return this.statuesModel;
-    }
+	/** get 地点 */
+	public String getAddress() {
+		return this.address;
+	}
 
-    /** set 状态：2审核中，1未完成，0已完成 */
-    public void setStatuesModel(TMBaseEnum statuesModel){
-    	this.statuesModel = statuesModel;
-    }
-    
-    @JsonIgnore
-    public List<Long> getStartUsersModelListIds(){
-    	return Collections3.extractToList(this.startUsersModelList, "id");
-//    	return BeanMapper.mapList(this.startUsersModelList,Long.class);
-    }
+	/** set 地点 */
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-    public List<TennisUserDTO> getStartUsersModelList(){
-    	return BeanMapper.mapList(this.startUsersModelList,TennisUserDTO.class);
-    }
-    /** get 收藏 */
-//    @JsonIgnore
-//    public List<TMTennisUser> getStartUsersModelList(){
-//    	return this.startUsersModelList;
-//    }
+	/** get 经度 */
+	public double getLongitude() {
+		return this.longitude;
+	}
 
-    /** set 收藏 */
-    public void setStartUsersModelList(List<TMTennisUser> startUsersModelList){
-    	this.startUsersModelList = startUsersModelList;
-    }
-    
-    @JsonIgnore
-    public List<Long> getOwnersModelListIds(){
-    	return Collections3.extractToList(this.ownersModelList,"id");
-    }
+	/** set 经度 */
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
 
-    public List<TennisUserDTO> getOwnersModelList(){
-    	return BeanMapper.mapList(this.ownersModelList,TennisUserDTO.class);
-    }
-    /** get  // 发起者 */
-//    public List<TMTennisUser> getOwnersModelList(){
-//    	return this.ownersModelList;
-//    }
+	/** get 纬度 */
+	public double getLatitude() {
+		return this.latitude;
+	}
 
-    /** set  // 发起者 */
-    public void setOwnersModelList(List<TMTennisUser> ownersModelList){
-    	this.ownersModelList = ownersModelList;
-    }
-    
-    @JsonIgnore
-    public List<Long> getParticipantModelListIds(){
-    	return Collections3.extractToList(this.participantModelList,"id");
-    }
+	/** set 纬度 */
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
 
-    public List<TennisUserDTO> getParticipantModelList(){
-    	return BeanMapper.mapList(this.participantModelList,TennisUserDTO.class);
-    }
-    /** get  // 参与者 */
-//    public List<TMTennisUser> getParticipantModelList(){
-//    	return this.participantModelList;
-//    }
+	/** get 备注 */
+	public String getRemark() {
+		return this.remark;
+	}
 
-    /** set  // 参与者 */
-    public void setParticipantModelList(List<TMTennisUser> participantModelList){
-    	this.participantModelList = participantModelList;
-    }
-    
-    @JsonIgnore
-    public List<Long> getEvaluatesModelListIds(){
-    	return Collections3.extractToList(this.evaluatesModelList,"id");
-    }
+	/** set 备注 */
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 
-    public List<EvaluateDTO> getEvaluatesModelList(){
-    	return BeanMapper.mapList(this.evaluatesModelList,EvaluateDTO.class);
-    }
-    /** get 评论 */
-//    public List<TMEvaluate> getEvaluatesModelList(){
-//    	return this.evaluatesModelList;
-//    }
+	/** get 权重 */
+	public int getWeight() {
+		return this.weight;
+	}
 
-    /** set 评论 */
-    public void setEvaluatesModelList(List<TMEvaluate> evaluatesModelList){
-    	this.evaluatesModelList = evaluatesModelList;
-    }
-    
-    @JsonIgnore
-    public List<Long> getCourtsModelListIds(){
-    	return Collections3.extractToList(this.courtsModelList,"id");
-    }
+	/** set 权重 */
+	public void setWeight(int weight) {
+		this.weight = weight;
+	}
 
-    public List<CourtDTO> getCourtsModelList(){
-    	return BeanMapper.mapList(this.courtsModelList,CourtDTO.class);
-    }
-    /** get 场地 */
-//    public List<TMCourt> getCourtsModelList(){
-//    	return this.courtsModelList;
-//    }
+	@JsonIgnore
+	public Long getCategoryModelId() {
+		return this.category.getId();
+	}
 
-    /** set 场地 */
-    public void setCourtsModelList(List<TMCourt> courtsModelList){
-    	this.courtsModelList = courtsModelList;
-    }
-    
+	@JsonIgnore
+	public BaseEnumDTO getCategoryModelDTO() {
+		return BeanMapper.map(this.category, BaseEnumDTO.class);
+	}
 
+	/** get 分类 */
+	public TMBaseEnum getCategory() {
+		return this.category;
+	}
+
+	/** set 分类 */
+	public void setCategory(TMBaseEnum categoryModel) {
+		this.category = categoryModel;
+	}
+
+	@JsonIgnore
+	public Long getStatuesModelId() {
+		return this.statues.getId();
+	}
+
+	@JsonIgnore
+	public BaseEnumDTO getStatuesModelDTO() {
+		return BeanMapper.map(this.statues, BaseEnumDTO.class);
+	}
+
+	/** get 状态：2审核中，1未完成，0已完成 */
+	public TMBaseEnum getStatues() {
+		return this.statues;
+	}
+
+	/** set 状态：2审核中，1未完成，0已完成 */
+	public void setStatues(TMBaseEnum statuesModel) {
+		this.statues = statuesModel;
+	}
+
+	@JsonIgnore
+	public List<Long> getStartUsersModelListIds() {
+		return Collections3.extractToList(this.startUsersModelList, "id");
+		// return BeanMapper.mapList(this.startUsersModelList,Long.class);
+	}
+
+	public List<TennisUserDTO> getStartUsersTennisUserList() {
+		return BeanMapper.mapList(this.startUsersModelList, TennisUserDTO.class);
+	}
+
+	/** get 收藏 */
+	// @JsonIgnore
+	// public List<TMTennisUser> getStartUsersModelList(){
+	// return this.startUsersModelList;
+	// }
+
+	/** set 收藏 */
+	public void setStartUsersModelList(List<TMTennisUser> startUsersModelList) {
+		this.startUsersModelList = startUsersModelList;
+	}
+
+	@JsonIgnore
+	public List<Long> getOwnersModelListIds() {
+		return Collections3.extractToList(this.ownersModelList, "id");
+	}
+
+	public List<TennisUserDTO> getOwnersTennisUserList() {
+		return BeanMapper.mapList(this.ownersModelList, TennisUserDTO.class);
+	}
+
+	/** get // 发起者 */
+	// public List<TMTennisUser> getOwnersModelList(){
+	// return this.ownersModelList;
+	// }
+
+	/** set // 发起者 */
+	public void setOwnersModelList(List<TMTennisUser> ownersModelList) {
+		this.ownersModelList = ownersModelList;
+	}
+
+	@JsonIgnore
+	public List<Long> getParticipantModelListIds() {
+		return Collections3.extractToList(this.participantModelList, "id");
+	}
+
+	public List<TennisUserDTO> getParticipantTennisUserList() {
+		return BeanMapper.mapList(this.participantModelList, TennisUserDTO.class);
+	}
+
+	/** get // 参与者 */
+	// public List<TMTennisUser> getParticipantModelList(){
+	// return this.participantModelList;
+	// }
+
+	/** set // 参与者 */
+	public void setParticipantModelList(List<TMTennisUser> participantModelList) {
+		this.participantModelList = participantModelList;
+	}
+
+	@JsonIgnore
+	public List<Long> getEvaluatesModelListIds() {
+		return Collections3.extractToList(this.commentsModelList, "id");
+	}
+
+	public List<EvaluateDTO> getCommentsEvaluateList() {
+		return BeanMapper.mapList(this.commentsModelList, EvaluateDTO.class);
+	}
+
+	/** get 评论 */
+	// public List<TMEvaluate> getEvaluatesModelList(){
+	// return this.evaluatesModelList;
+	// }
+
+	/** set 评论 */
+	public void setEvaluatesModelList(List<TMEvaluate> evaluatesModelList) {
+		this.commentsModelList = evaluatesModelList;
+	}
+
+	@JsonIgnore
+	public List<Long> getCourtsModelListIds() {
+		return Collections3.extractToList(this.courtsModelList, "id");
+	}
+
+	public List<CourtDTO> getCourtsCourtList() {
+		return BeanMapper.mapList(this.courtsModelList, CourtDTO.class);
+	}
+
+	/** get 场地 */
+	// public List<TMCourt> getCourtsModelList(){
+	// return this.courtsModelList;
+	// }
+
+	/** set 场地 */
+	public void setCourtsModelList(List<TMCourt> courtsModelList) {
+		this.courtsModelList = courtsModelList;
+	}
 
 }

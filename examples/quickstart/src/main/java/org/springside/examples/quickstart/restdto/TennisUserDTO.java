@@ -5,6 +5,7 @@ import org.springside.examples.quickstart.entity.TMBaseEnum;
 public class TennisUserDTO {
 
 	private long id;
+	private String account;
 	private String name;
 	private String roles;
 	private String registerDate;
@@ -117,6 +118,14 @@ public class TennisUserDTO {
 
 	public void setAccountLevel(String accountLevel) {
 		this.accountLevel = accountLevel;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
 	}
 
 }
