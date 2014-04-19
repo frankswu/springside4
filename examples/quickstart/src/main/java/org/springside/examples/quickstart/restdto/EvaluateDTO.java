@@ -61,6 +61,7 @@ public class EvaluateDTO {
 		return this.evaluateCategory;
 	}
 
+	@JsonIgnore
 	public TMBaseEnum getEvaluateCategory() {
 		return evaluateCategory;
 	}

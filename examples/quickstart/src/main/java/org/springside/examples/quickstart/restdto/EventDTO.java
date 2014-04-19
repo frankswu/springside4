@@ -230,7 +230,7 @@ public class EventDTO {
 		// return BeanMapper.mapList(this.startUsersModelList,Long.class);
 	}
 
-	public List<TennisUserDTO> getStartUsersTennisUserList() {
+	public List<TennisUserDTO> getStartUsers_TennisUser_List() {
 		return BeanMapper.mapList(this.startUsersModelList, TennisUserDTO.class);
 	}
 
@@ -250,7 +250,7 @@ public class EventDTO {
 		return Collections3.extractToList(this.ownersModelList, "id");
 	}
 
-	public List<TennisUserDTO> getOwnersTennisUserList() {
+	public List<TennisUserDTO> getOwners_TennisUser_List() {
 		return BeanMapper.mapList(this.ownersModelList, TennisUserDTO.class);
 	}
 
@@ -269,7 +269,7 @@ public class EventDTO {
 		return Collections3.extractToList(this.participantModelList, "id");
 	}
 
-	public List<TennisUserDTO> getParticipantTennisUserList() {
+	public List<TennisUserDTO> getParticipant_TennisUser_List() {
 		return BeanMapper.mapList(this.participantModelList, TennisUserDTO.class);
 	}
 
@@ -288,7 +288,7 @@ public class EventDTO {
 		return Collections3.extractToList(this.commentsModelList, "id");
 	}
 
-	public List<EvaluateDTO> getCommentsEvaluateList() {
+	public List<EvaluateDTO> getComments_Evaluate_List() {
 		return BeanMapper.mapList(this.commentsModelList, EvaluateDTO.class);
 	}
 
@@ -307,7 +307,7 @@ public class EventDTO {
 		return Collections3.extractToList(this.courtsModelList, "id");
 	}
 
-	public List<CourtDTO> getCourtsCourtList() {
+	public List<CourtDTO> getCourts_Court_List() {
 		return BeanMapper.mapList(this.courtsModelList, CourtDTO.class);
 	}
 
