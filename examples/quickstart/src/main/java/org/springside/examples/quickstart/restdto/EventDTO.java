@@ -5,6 +5,7 @@ import java.util.List;
 import org.springside.examples.quickstart.entity.TMBaseEnum;
 import org.springside.examples.quickstart.entity.TMCourt;
 import org.springside.examples.quickstart.entity.TMEvaluate;
+import org.springside.examples.quickstart.entity.TMEvent;
 import org.springside.examples.quickstart.entity.TMTennisUser;
 import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.utils.Collections3;
@@ -319,6 +320,17 @@ public class EventDTO {
 	/** set 场地 */
 	public void setCourtsModelList(List<TMCourt> courtsModelList) {
 		this.courtsModelList = courtsModelList;
+	}
+	
+	public static EventDTO createByTMEvent(TMEvent event) {
+
+		EventDTO dto = BeanMapper.map(event, EventDTO.class);
+		dto.setStartUsersModelList(event.getStartUsers());
+		dto.setOwnersModelList(event.getOwner());
+		dto.setParticipantModelList(event.getParticipant());
+		dto.setCourtsModelList(event.getCourtList());
+		dto.setEvaluatesModelList(event.getComments());
+		return dto;
 	}
 
 }

@@ -1,5 +1,7 @@
 package org.springside.examples.quickstart.service.tennis;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +15,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.quickstart.entity.TMEvent;
 import org.springside.examples.quickstart.repository.EventDao;
+import org.springside.examples.quickstart.restdto.EventDTO;
+import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.persistence.DynamicSpecifications;
 import org.springside.modules.persistence.SearchFilter;
 import org.springside.modules.persistence.SearchFilter.Operator;
@@ -23,30 +27,42 @@ import org.springside.modules.persistence.SearchFilter.Operator;
 @Transactional
 public class EventService {
 
-	private EventDao EventDao;
+	private EventDao eventDao;
 
 	public TMEvent getTMEvent(Long id) {
-		return EventDao.findOne(id);
+		return eventDao.findOne(id);
 	}
 
 	public void saveTMEvent(TMEvent entity) {
-		EventDao.save(entity);
+		eventDao.save(entity);
 	}
 
 	public void deleteTMEvent(Long id) {
-		EventDao.delete(id);
+		eventDao.delete(id);
 	}
 
 	public List<TMEvent> getAllTMEvent() {
-		return (List<TMEvent>) EventDao.findAll();
+		return (List<TMEvent>) eventDao.findAll();
 	}
 
-	public Page<TMEvent> getXXXXTMEvent(Long userId, Map<String, Object> searchParams, int pageNumber, int pageSize,
+	public Page<TMEvent> getMoreEventPageList(Long userId, Map<String, Object> searchParams, int pageNumber, int pageSize,
 			String sortType) {
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
 		Specification<TMEvent> spec = buildSpecification(userId, searchParams);
 
-		return EventDao.findAll(spec, pageRequest);
+		return eventDao.findAll(spec, pageRequest);
+	}
+
+	public List<EventDTO> getMoreEventDTOPageList(Long userId, Map<String, Object> searchParams, int pageNumber, int pageSize,
+			String sortType) {
+		List<EventDTO>  eventDtoList = new ArrayList<EventDTO>();
+		Page<TMEvent> eventList =  getMoreEventPageList(null,searchParams, pageNumber,pageSize,sortType);
+		Iterator<TMEvent> it = eventList.iterator();
+		while (it.hasNext()) {
+			TMEvent event = it.next();
+			eventDtoList.add(EventDTO.createByTMEvent(event));
+		}
+		return eventDtoList;
 	}
 
 	/**
@@ -68,13 +84,15 @@ public class EventService {
 	 */
 	private Specification<TMEvent> buildSpecification(Long userId, Map<String, Object> searchParams) {
 		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
-		filters.put("user.id", new SearchFilter("user.id", Operator.EQ, userId));
+		if (userId != null && userId > 0) {
+			filters.put("user.id", new SearchFilter("user.id", Operator.EQ, userId));
+		}
 		Specification<TMEvent> spec = DynamicSpecifications.bySearchFilter(filters.values(), TMEvent.class);
 		return spec;
 	}
 
 	@Autowired
 	public void setEventDao(EventDao EventDao) {
-		this.EventDao = EventDao;
+		this.eventDao = EventDao;
 	}
 }

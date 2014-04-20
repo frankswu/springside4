@@ -2,14 +2,19 @@ package org.springside.examples.quickstart.rest;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Validator;
 
+import org.hibernate.annotations.Filters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,6 +25,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,6 +35,7 @@ import org.springside.examples.quickstart.restdto.EventDTO;
 import org.springside.examples.quickstart.service.tennis.EventService;
 import org.springside.modules.beanvalidator.BeanValidators;
 import org.springside.modules.mapper.BeanMapper;
+import org.springside.modules.web.Servlets;
 
 /**
  * TMEvent的Restful API的Controller.
@@ -49,18 +56,25 @@ public class EventRestController {
 	private static Logger logger = LoggerFactory.getLogger(EventRestController.class);
 
 	@Autowired
-	private EventService EventService;
+	private EventService eventService;
 
 	@Autowired
 	private Validator validator;
 
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public List<EventDTO> list() {
-		List<EventDTO>  eventDtoList = new ArrayList<EventDTO>();
+	public List<EventDTO> list(
+			@RequestParam(value="page",defaultValue="1")int page,
+			@RequestParam(value="page.size",defaultValue="5")int pageSize,
+			@RequestParam(value="sortType",defaultValue="auto")String sortType,
+			ServletRequest request) {
+		Map<String, Object> searchParams = Servlets.getParametersStartingWith(request, "filter_");
 		
-//		BeanMapper.mapList( EventService.getAllTMEvent(),EventDTO.class); 
-		for (TMEvent event : EventService.getAllTMEvent()) {
+		List<EventDTO>  eventDtoList = new ArrayList<EventDTO>();
+		Page<TMEvent> eventList =  eventService.getMoreEventPageList(null,searchParams, page,pageSize,sortType);
+		Iterator<TMEvent> it = eventList.iterator();
+		while (it.hasNext()) {
+			TMEvent event = it.next();
 			EventDTO dto = BeanMapper.map(event, EventDTO.class);
 			dto.setStartUsersModelList(event.getStartUsers());
 			dto.setOwnersModelList(event.getOwner());
@@ -77,7 +91,7 @@ public class EventRestController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ResponseEntity<?> get(@PathVariable("id") Long id) {
-		TMEvent TMEvent = EventService.getTMEvent(id);
+		TMEvent TMEvent = eventService.getTMEvent(id);
 		if (TMEvent == null) {
 			logger.warn("TMEvent with id {} not found", id);
 			return new ResponseEntity(HttpStatus.NOT_FOUND);
@@ -92,7 +106,7 @@ public class EventRestController {
 		BeanValidators.validateWithException(validator, TMEvent);
 
 		// 保存任务
-		EventService.saveTMEvent(TMEvent);
+		eventService.saveTMEvent(TMEvent);
 
 		// 按照Restful风格约定，创建指向新任务的url, 也可以直接返回id或对象.
 		Long id = TMEvent.getId();
@@ -108,7 +122,7 @@ public class EventRestController {
 		// 调用JSR303 Bean Validator进行校验, 异常将由RestExceptionHandler统一处理.
 		BeanValidators.validateWithException(validator, TMEvent);
 		// 保存
-		EventService.saveTMEvent(TMEvent);
+		eventService.saveTMEvent(TMEvent);
 
 		// 按Restful约定，返回204状态码, 无内容. 也可以返回200状态码.
 		return new ResponseEntity(HttpStatus.NO_CONTENT);
@@ -117,7 +131,7 @@ public class EventRestController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("id") Long id) {
-		EventService.deleteTMEvent(id);
+		eventService.deleteTMEvent(id);
 	}
 
 	// Total control - setup a model and return the view name yourself. Or consider
