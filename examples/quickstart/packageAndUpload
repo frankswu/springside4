@@ -1,0 +1,7 @@
+
+echo "[Step 1] package quick start.war"
+cd  /Users/frankswu/Documents/workspace-springside/springside4/examples/quickstart
+mvn package -Dmaven.test.skip=true
+
+echo "[Step 2]upload quick start.war to aliyun server"
+scp /Users/frankswu/Documents/workspace-springside/springside4/examples/quickstart/target/quickstart.war root@218.244.146.177:/home/freeteam/download/war
