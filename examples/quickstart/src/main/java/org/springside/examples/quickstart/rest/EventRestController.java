@@ -40,6 +40,17 @@ import org.springside.modules.web.Servlets;
 /**
  * TMEvent的Restful API的Controller.
  * <br>
+列表
+method:get 
+http://218.244.146.177:8080/quickstart/api/v1/event?filter_LIKE_title=ddsf&page=10#
+filter_LIKE_title作为查询条件，有前缀filer标示查询条件，大写LIKE是查询表达式，title查询的字段,等号后面就是该字段查询值,等价于
+（title like '%ddsf%'）。
+page是分页页数
+
+詳情
+method:get
+http://218.244.146.177:8080/quickstart/api/v1/event/1
+ * 
  * List page : GET /api/v1/event/ <br>
  * get one: GET /api/v1/event/{id} <br>
  * Create page : GET /api/v1/event/create <br>
