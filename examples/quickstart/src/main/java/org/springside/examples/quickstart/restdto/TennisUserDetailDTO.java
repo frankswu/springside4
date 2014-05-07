@@ -2,8 +2,11 @@ package org.springside.examples.quickstart.restdto;
 
 import java.util.List;
 
+import org.springframework.util.MultiValueMap;
 import org.springside.examples.quickstart.entity.TMEvaluate;
 import org.springside.examples.quickstart.entity.TMImage;
+import org.springside.examples.quickstart.entity.TMTennisUser;
+import org.springside.modules.mapper.BeanMapper;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Lists;
@@ -114,6 +117,14 @@ public class TennisUserDetailDTO extends TennisUserDTO {
 	@JsonIgnore
 	public List<TMImage> getImageList() {
 		return imageList;
+	}
+
+	public static TennisUserDetailDTO createByTennisUser4Detail(
+			TMTennisUser tennisUser) {
+		TennisUserDetailDTO dto = BeanMapper.map(tennisUser, TennisUserDetailDTO.class);
+		dto.setFriendsImpression(tennisUser.getFriendsImpression());
+		dto.setImageList(tennisUser.getImages());
+		return dto;
 	}
 
 }

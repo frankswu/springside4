@@ -41,7 +41,7 @@ public class TenniesUserService {
 		return (List<TMTennisUser>) TenniesUserDao.findAll();
 	}
 
-	public Page<TMTennisUser> getXXXXTMTennisUser(Long userId, Map<String, Object> searchParams, int pageNumber, int pageSize,
+	public Page<TMTennisUser> getMoreTennisUser(Long userId, Map<String, Object> searchParams, int pageNumber, int pageSize,
 			String sortType) {
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
 		Specification<TMTennisUser> spec = buildSpecification(userId, searchParams);
@@ -68,7 +68,9 @@ public class TenniesUserService {
 	 */
 	private Specification<TMTennisUser> buildSpecification(Long userId, Map<String, Object> searchParams) {
 		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
-		filters.put("user.id", new SearchFilter("user.id", Operator.EQ, userId));
+		if (userId != null && userId > 0) {
+			filters.put("user.id", new SearchFilter("user.id", Operator.EQ, userId));
+		}
 		Specification<TMTennisUser> spec = DynamicSpecifications.bySearchFilter(filters.values(), TMTennisUser.class);
 		return spec;
 	}

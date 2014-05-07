@@ -1,6 +1,7 @@
 package org.springside.examples.quickstart.restdto;
 
 import org.springside.examples.quickstart.entity.TMBaseCity;
+import org.springside.examples.quickstart.entity.TMCourt;
 import org.springside.modules.mapper.BeanMapper;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -182,6 +183,11 @@ public class CourtDTO {
 	/** set 区县id */
 	public void setDistrict(TMBaseCity districtModel) {
 		this.district = districtModel;
+	}
+
+	public static CourtDTO createByCourt4(TMCourt court) {
+		CourtDTO dto = BeanMapper.map(court, CourtDTO.class);
+		return dto;
 	}
 
 }

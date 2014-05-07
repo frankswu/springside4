@@ -41,13 +41,6 @@ public class CourtService {
 		return (List<TMCourt>) CourtDao.findAll();
 	}
 
-	public Page<TMCourt> getXXXXTMCourt(Long userId, Map<String, Object> searchParams, int pageNumber, int pageSize,
-			String sortType) {
-		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
-		Specification<TMCourt> spec = buildSpecification(userId, searchParams);
-
-		return CourtDao.findAll(spec, pageRequest);
-	}
 
 	/**
 	 * 创建分页请求.
@@ -68,7 +61,9 @@ public class CourtService {
 	 */
 	private Specification<TMCourt> buildSpecification(Long userId, Map<String, Object> searchParams) {
 		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
-		filters.put("user.id", new SearchFilter("user.id", Operator.EQ, userId));
+		if (userId != null && userId > 0) {
+			filters.put("user.id", new SearchFilter("user.id", Operator.EQ, userId));
+		}
 		Specification<TMCourt> spec = DynamicSpecifications.bySearchFilter(filters.values(), TMCourt.class);
 		return spec;
 	}
@@ -76,5 +71,14 @@ public class CourtService {
 	@Autowired
 	public void setCourtDao(CourtDao CourtDao) {
 		this.CourtDao = CourtDao;
+	}
+
+	public Page<TMCourt> getMoreCourt(Long userId,
+			Map<String, Object> searchParams, int pageNumber, int pageSize,
+			String sortType) {
+		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
+		Specification<TMCourt> spec = buildSpecification(userId, searchParams);
+
+		return CourtDao.findAll(spec, pageRequest);
 	}
 }

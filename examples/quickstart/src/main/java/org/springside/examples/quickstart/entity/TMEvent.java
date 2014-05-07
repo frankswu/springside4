@@ -180,7 +180,7 @@ public class TMEvent extends IdEntity {
 
 	@NotNull
 	@OneToOne
-	@JoinColumn(name = "statues_id")
+	@JoinColumn(name = "status_id")
 	public TMBaseEnum getStatues() {
 		return statues;
 	}

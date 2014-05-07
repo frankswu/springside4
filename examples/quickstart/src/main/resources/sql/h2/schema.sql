@@ -153,7 +153,7 @@ create table tb_event (
     commit_Time TIMESTAMP  null,
     require varchar(255) null,
     category_id bigint  null,
-    statues bigint null,
+    status_id bigint null,
     address varchar(255) null,
     totol_Price double  null,
     phone varchar(255) null,

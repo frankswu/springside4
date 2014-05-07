@@ -41,7 +41,7 @@ public class TMTennisUser extends TMBaseUser {
     /** 生日 用时间戳？（简单的使用格式化的日期字符串也可以） */
     private String birthday;
     /** 性别 0代表男士 1代表女士 */
-    private TMBaseEnum gender;
+    private TMBaseEnum gender;	
     /** 头像 */
     private String phote;
     /** 联系电话 */

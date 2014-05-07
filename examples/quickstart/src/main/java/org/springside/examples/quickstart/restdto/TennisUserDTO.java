@@ -1,6 +1,9 @@
 package org.springside.examples.quickstart.restdto;
 
+import org.springframework.util.MultiValueMap;
 import org.springside.examples.quickstart.entity.TMBaseEnum;
+import org.springside.examples.quickstart.entity.TMTennisUser;
+import org.springside.modules.mapper.BeanMapper;
 
 public class TennisUserDTO {
 
@@ -109,5 +112,11 @@ public class TennisUserDTO {
 	public void setAccount(String account) {
 		this.account = account;
 	}
+
+	public static TennisUserDTO createByTennisUser4List(TMTennisUser user) {
+		TennisUserDTO userDTO = BeanMapper.map(user, TennisUserDTO.class);
+		return userDTO;
+	}
+
 
 }
