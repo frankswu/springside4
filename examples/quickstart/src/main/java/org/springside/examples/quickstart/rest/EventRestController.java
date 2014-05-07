@@ -10,7 +10,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Validator;
 
-import org.hibernate.annotations.Filters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,27 +31,20 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springside.examples.quickstart.entity.TMEvent;
 import org.springside.examples.quickstart.restdto.EventDTO;
+import org.springside.examples.quickstart.restdto.EventDetailDTO;
 import org.springside.examples.quickstart.service.tennis.EventService;
 import org.springside.modules.beanvalidator.BeanValidators;
-import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.Servlets;
 
 /**
- * TMEvent的Restful API的Controller.
- * <br>
-列表
-method:get 
-http://218.244.146.177:8080/quickstart/api/v1/event?filter_LIKE_title=ddsf&page=10#
-filter_LIKE_title作为查询条件，有前缀filer标示查询条件，大写LIKE是查询表达式，title查询的字段,等号后面就是该字段查询值,等价于
-（title like '%ddsf%'）。
-page是分页页数
-
-詳情
-method:get
-http://218.244.146.177:8080/quickstart/api/v1/event/1
+ * TMEvent的Restful API的Controller. <br>
+ * 列表<br>
+ * method:get http://218.244.146.177:8080/quickstart/api/v1/event?filter_LIKE_title=ddsf&page=10#<br>
+ * filter_LIKE_title作为查询条件，有前缀filer标示查询条件，大写LIKE是查询表达式，title查询的字段,等号后面就是该字段查询值,等价于 （title like '%ddsf%'）。 page是分页页数<br>
  * 
- * List page : GET /api/v1/event/ <br>
- * get one: GET /api/v1/event/{id} <br>
+ * 詳情<br>
+ * method:get http://218.244.146.177:8080/quickstart/api/v1/event/1<br>
+ * 
  * Create page : GET /api/v1/event/create <br>
  * Create action : POST /api/v1/event/ <br>
  * Update action : PUT /api/v1/event/{id} <br>
@@ -74,40 +66,37 @@ public class EventRestController {
 
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public List<EventDTO> list(
-			@RequestParam(value="page",defaultValue="1")int page,
-			@RequestParam(value="page.size",defaultValue="5")int pageSize,
-			@RequestParam(value="sortType",defaultValue="auto")String sortType,
-			ServletRequest request) {
+	public List<EventDTO> list(@RequestParam(value = "page", defaultValue = "1") int page,
+			@RequestParam(value = "page.size", defaultValue = "5") int pageSize,
+			@RequestParam(value = "sortType", defaultValue = "auto") String sortType, ServletRequest request) {
 		Map<String, Object> searchParams = Servlets.getParametersStartingWith(request, "filter_");
-		
-		List<EventDTO>  eventDtoList = new ArrayList<EventDTO>();
-		Page<TMEvent> eventList =  eventService.getMoreEventPageList(null,searchParams, page,pageSize,sortType);
+
+		List<EventDTO> eventDtoList = new ArrayList<EventDTO>();
+		Page<TMEvent> eventList = eventService.getMoreEventPageList(null, searchParams, page, pageSize, sortType);
 		Iterator<TMEvent> it = eventList.iterator();
 		while (it.hasNext()) {
 			TMEvent event = it.next();
-			EventDTO dto = BeanMapper.map(event, EventDTO.class);
-			dto.setStartUsersModelList(event.getStartUsers());
-			dto.setOwnersModelList(event.getOwner());
-			dto.setParticipantModelList(event.getParticipant());
-			dto.setCourtsModelList(event.getCourtList());
-			dto.setEvaluatesModelList(event.getComments());
-			eventDtoList.add(dto);
+			// EventDTO dto = BeanMapper.map(event, EventDTO.class);
+			// dto.setStartUsersModelList(event.getStartUsers());
+			// dto.setOwnersModelList(event.getOwner());
+			// dto.setParticipantModelList(event.getParticipant());
+			// dto.setCourtsModelList(event.getCourtList());
+			// dto.setEvaluatesModelList(event.getComments());
+			eventDtoList.add(EventDTO.createByEvent4List(event));
 		}
-		
-		
+
 		return eventDtoList;
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ResponseEntity<?> get(@PathVariable("id") Long id) {
-		TMEvent TMEvent = eventService.getTMEvent(id);
-		if (TMEvent == null) {
+		TMEvent event = eventService.getTMEvent(id);
+		if (event == null) {
 			logger.warn("TMEvent with id {} not found", id);
 			return new ResponseEntity(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity(TMEvent, HttpStatus.OK);
+		return new ResponseEntity(EventDetailDTO.createByEvent4Detail(event), HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

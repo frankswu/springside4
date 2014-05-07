@@ -15,20 +15,6 @@ public class TennisUserDTO {
 	private String phote;
 	/** 联系电话 */
 	private String phone;
-	/** 邮箱 */
-	// private String email;
-	/** 球龄 */
-	// private int tennisAge;
-	/** 水平 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0 5.5 */
-	// private int tennisLevel;
-	/** 个人说明 */
-	// private int personalInfo;
-	/** 登陆次数 */
-	// private int loginTimes;
-	/** 最后登陆时间 */
-	// private String lastLoginDate;
-	/** 设备标识 */
-	// private String deviceFlag;
 	/** 登陆状态 0 在线 1 不在线 2 黑名单 */
 	private TMBaseEnum state;
 	/** 积分 */
@@ -36,10 +22,6 @@ public class TennisUserDTO {
 	/** 等级 */
 	private String accountLevel;
 
-	/** 好友印象 */
-	// private List<TMEvaluate> friendsImpression= Lists.newArrayList();
-	/**  */
-	// private List<TMImage> imageList = Lists.newArrayList();
 	public long getId() {
 		return id;
 	}

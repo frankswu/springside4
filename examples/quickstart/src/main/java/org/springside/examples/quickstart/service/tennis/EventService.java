@@ -60,7 +60,7 @@ public class EventService {
 		Iterator<TMEvent> it = eventList.iterator();
 		while (it.hasNext()) {
 			TMEvent event = it.next();
-			eventDtoList.add(EventDTO.createByTMEvent(event));
+			eventDtoList.add(EventDTO.createByEvent4List(event));
 		}
 		return eventDtoList;
 	}

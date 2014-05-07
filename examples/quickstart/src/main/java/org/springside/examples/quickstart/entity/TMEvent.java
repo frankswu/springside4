@@ -117,7 +117,6 @@ public class TMEvent extends IdEntity {
 		this.require = require;
 	}
 
-	
 	public Date getCommitTime() {
 		return commitTime;
 	}
@@ -181,7 +180,7 @@ public class TMEvent extends IdEntity {
 
 	@NotNull
 	@OneToOne
-	@JoinColumn(name = "event_status_id")
+	@JoinColumn(name = "statues_id")
 	public TMBaseEnum getStatues() {
 		return statues;
 	}
@@ -207,13 +206,12 @@ public class TMEvent extends IdEntity {
 	public List<TMTennisUser> getStartUsers() {
 		return startUsers;
 	}
-	
+
 	@Transient
 	public List<TennisUserDTO> getStartUsersList() {
 		List<TennisUserDTO> userDTOList = BeanMapper.mapList(startUsers, TennisUserDTO.class);
 		return userDTOList;
 	}
-	
 
 	public void setStartUsers(List<TMTennisUser> startUsersList) {
 		this.startUsers = startUsersList;

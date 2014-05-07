@@ -15,45 +15,45 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class EventDTO {
 
 	/**  */
-	private long id;
+	protected long id;
 	/** 标题 */
-	private String title;
+	protected String title;
 	/** 内容描述 */
-	private String descrition;
+	protected String descrition;
 	/** 电话 */
-	private String phone;
+	protected String phone;
 	/** 费用 */
-	private double totolPrice;
+	protected double totolPrice;
 	/** 对手水平要求 */
-	private String require;
+	protected String require;
 	/** 发起时间 */
-	private String commitTime;
+	protected String commitTime;
 	/** 活动时间 */
-	private String eventTime;
+	protected String eventTime;
 	/** 地点 */
-	private String address;
+	protected String address;
 	/** 经度 */
-	private double longitude;
+	protected double longitude;
 	/** 纬度 */
-	private double latitude;
+	protected double latitude;
 	/** 备注 */
-	private String remark;
+	protected String remark;
 	/** 权重 */
-	private int weight;
+	protected int weight;
 	/** 分类 */
-	private TMBaseEnum category;
+	protected TMBaseEnum category;
 	/** 状态：2审核中，1未完成，0已完成 */
-	private TMBaseEnum statues;
+	protected TMBaseEnum statues;
 	/** 收藏 */
-	private List<TMTennisUser> startUsersModelList;
+	protected List<TMTennisUser> startUsersModelList;
 	/** // 发起者 */
-	private List<TMTennisUser> ownersModelList;
+	protected List<TMTennisUser> ownersModelList;
 	/** // 参与者 */
-	private List<TMTennisUser> participantModelList;
+	protected List<TMTennisUser> participantModelList;
 	/** 评论 */
-	private List<TMEvaluate> commentsModelList;
+	protected List<TMEvaluate> commentsModelList;
 	/** 场地 */
-	private List<TMCourt> courtsModelList;
+	protected List<TMCourt> courtsModelList;
 
 	/** get */
 	public long getId() {
@@ -236,10 +236,10 @@ public class EventDTO {
 	}
 
 	/** get 收藏 */
-	// @JsonIgnore
-	// public List<TMTennisUser> getStartUsersModelList(){
-	// return this.startUsersModelList;
-	// }
+	@JsonIgnore
+	public List<TMTennisUser> getStartUsersModelList() {
+		return this.startUsersModelList;
+	}
 
 	/** set 收藏 */
 	public void setStartUsersModelList(List<TMTennisUser> startUsersModelList) {
@@ -321,8 +321,8 @@ public class EventDTO {
 	public void setCourtsModelList(List<TMCourt> courtsModelList) {
 		this.courtsModelList = courtsModelList;
 	}
-	
-	public static EventDTO createByTMEvent(TMEvent event) {
+
+	public static EventDTO createByEvent4List(TMEvent event) {
 
 		EventDTO dto = BeanMapper.map(event, EventDTO.class);
 		dto.setStartUsersModelList(event.getStartUsers());
