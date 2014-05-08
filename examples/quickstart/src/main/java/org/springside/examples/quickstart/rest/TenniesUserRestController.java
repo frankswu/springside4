@@ -26,12 +26,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
-import org.springside.examples.quickstart.entity.TMEvent;
 import org.springside.examples.quickstart.entity.TMTennisUser;
-import org.springside.examples.quickstart.restdto.EventDTO;
 import org.springside.examples.quickstart.restdto.TennisUserDTO;
 import org.springside.examples.quickstart.restdto.TennisUserDetailDTO;
 import org.springside.examples.quickstart.service.tennis.TenniesUserService;
@@ -39,8 +36,14 @@ import org.springside.modules.beanvalidator.BeanValidators;
 import org.springside.modules.web.Servlets;
 
 /**
- * TMTennisUser的Restful API的Controller.
- * <br>
+ * TMTennisUser的Restful API的Controller. <br>
+ * 球友列表<br>
+ * method:get http://218.244.146.177:8080/quickstart/api/v1/tennis_user?filter_LIKE_title=ddsf&page=10#<br>
+ * filter_LIKE_title作为查询条件，有前缀filer标示查询条件，大写LIKE是查询表达式，title查询的字段,等号后面就是该字段查询值,等价于 （title like '%ddsf%'）。 page是分页页数<br>
+ * 
+ * 球友詳情<br>
+ * method:get http://218.244.146.177:8080/quickstart/api/v1/tennis_user/1<br>
+ * 
  * List page : GET /api/v1/tennis_user/ <br>
  * get one: GET /api/v1/tennis_user/{id} <br>
  * Create page : GET /api/v1/tennis_user/create <br>
@@ -71,7 +74,8 @@ public class TenniesUserRestController {
 		Map<String, Object> searchParams = Servlets.getParametersStartingWith(request, "filter_");
 
 		List<TennisUserDTO> tennisUserDTOList = new ArrayList<TennisUserDTO>();
-		Page<TMTennisUser> tennisUserList = tenniesUserService.getMoreTennisUser(null, searchParams, page, pageSize, sortType);
+		Page<TMTennisUser> tennisUserList = tenniesUserService.getMoreTennisUser(null, searchParams, page, pageSize,
+				sortType);
 		Iterator<TMTennisUser> it = tennisUserList.iterator();
 		while (it.hasNext()) {
 			TMTennisUser user = it.next();
@@ -92,8 +96,8 @@ public class TenniesUserRestController {
 		return new ResponseEntity(TennisUserDetailDTO.createByTennisUser4Detail(tennisUser), HttpStatus.OK);
 	}
 
-	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
+	// @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	// @ResponseBody
 	public ResponseEntity<?> create(@RequestBody TMTennisUser tennisUser, UriComponentsBuilder uriBuilder) {
 		// 调用JSR303 Bean Validator进行校验, 异常将由RestExceptionHandler统一处理.
 		BeanValidators.validateWithException(validator, tennisUser);
@@ -110,7 +114,7 @@ public class TenniesUserRestController {
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	// @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> update(@RequestBody TMTennisUser tennisUser) {
 		// 调用JSR303 Bean Validator进行校验, 异常将由RestExceptionHandler统一处理.
 		BeanValidators.validateWithException(validator, tennisUser);
@@ -121,8 +125,8 @@ public class TenniesUserRestController {
 		return new ResponseEntity(HttpStatus.NO_CONTENT);
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	@ResponseStatus(HttpStatus.NO_CONTENT)
+	// @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	// @ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("id") Long id) {
 		tenniesUserService.deleteTMTennisUser(id);
 	}

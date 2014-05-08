@@ -30,16 +30,20 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springside.examples.quickstart.entity.TMCourt;
-import org.springside.examples.quickstart.entity.TMTennisUser;
 import org.springside.examples.quickstart.restdto.CourtDTO;
-import org.springside.examples.quickstart.restdto.TennisUserDTO;
 import org.springside.examples.quickstart.service.tennis.CourtService;
 import org.springside.modules.beanvalidator.BeanValidators;
 import org.springside.modules.web.Servlets;
 
 /**
- * TMCourt的Restful API的Controller.
- * <br>
+ * TMCourt的Restful API的Controller. <br>
+ * 球场列表<br>
+ * method:get http://218.244.146.177:8080/quickstart/api/v1/court?filter_LIKE_title=ddsf&page=10#<br>
+ * filter_LIKE_title作为查询条件，有前缀filer标示查询条件，大写LIKE是查询表达式，title查询的字段,等号后面就是该字段查询值,等价于 （title like '%ddsf%'）。 page是分页页数<br>
+ * 
+ * 球场詳情<br>
+ * method:get http://218.244.146.177:8080/quickstart/api/v1/court/1<br>
+ * 
  * List page : GET /api/v1/court/ <br>
  * get one: GET /api/v1/court/{id} <br>
  * Create page : GET /api/v1/court/create <br>
@@ -76,7 +80,7 @@ public class CourtRestController {
 			TMCourt court = it.next();
 			courtDTOList.add(CourtDTO.createByCourt4(court));
 		}
-		
+
 		return courtDTOList;
 	}
 

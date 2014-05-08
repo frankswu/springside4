@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springside.examples.quickstart.entity.TMEvent;
@@ -38,11 +37,11 @@ import org.springside.modules.web.Servlets;
 
 /**
  * TMEvent的Restful API的Controller. <br>
- * 列表<br>
+ * 活动列表<br>
  * method:get http://218.244.146.177:8080/quickstart/api/v1/event?filter_LIKE_title=ddsf&page=10#<br>
  * filter_LIKE_title作为查询条件，有前缀filer标示查询条件，大写LIKE是查询表达式，title查询的字段,等号后面就是该字段查询值,等价于 （title like '%ddsf%'）。 page是分页页数<br>
  * 
- * 詳情<br>
+ * 活动詳情<br>
  * method:get http://218.244.146.177:8080/quickstart/api/v1/event/1<br>
  * 
  * Create page : GET /api/v1/event/create <br>
@@ -99,8 +98,8 @@ public class EventRestController {
 		return new ResponseEntity(EventDetailDTO.createByEvent4Detail(event), HttpStatus.OK);
 	}
 
-	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
+	// @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	// @ResponseBody
 	public ResponseEntity<?> create(@RequestBody TMEvent TMEvent, UriComponentsBuilder uriBuilder) {
 		// 调用JSR303 Bean Validator进行校验, 异常将由RestExceptionHandler统一处理.
 		BeanValidators.validateWithException(validator, TMEvent);
@@ -117,7 +116,7 @@ public class EventRestController {
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	// @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> update(@RequestBody TMEvent TMEvent) {
 		// 调用JSR303 Bean Validator进行校验, 异常将由RestExceptionHandler统一处理.
 		BeanValidators.validateWithException(validator, TMEvent);
@@ -128,8 +127,8 @@ public class EventRestController {
 		return new ResponseEntity(HttpStatus.NO_CONTENT);
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	@ResponseStatus(HttpStatus.NO_CONTENT)
+	// @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	// @ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("id") Long id) {
 		eventService.deleteTMEvent(id);
 	}
