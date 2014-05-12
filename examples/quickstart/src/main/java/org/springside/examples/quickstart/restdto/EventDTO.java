@@ -12,6 +12,7 @@ import org.springside.modules.utils.Collections3;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
 public class EventDTO {
 
 	/**  */

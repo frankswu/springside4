@@ -31,6 +31,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.springside.examples.quickstart.entity.TMEvent;
 import org.springside.examples.quickstart.restdto.EventDTO;
 import org.springside.examples.quickstart.restdto.EventDetailDTO;
+import org.springside.examples.quickstart.restdto.EventListDTO;
 import org.springside.examples.quickstart.service.tennis.EventService;
 import org.springside.modules.beanvalidator.BeanValidators;
 import org.springside.modules.web.Servlets;
@@ -65,7 +66,7 @@ public class EventRestController {
 
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public List<EventDTO> list(@RequestParam(value = "page", defaultValue = "1") int page,
+	public ResponseEntity<?> list(@RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "page.size", defaultValue = "5") int pageSize,
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType, ServletRequest request) {
 		Map<String, Object> searchParams = Servlets.getParametersStartingWith(request, "filter_");
@@ -75,16 +76,17 @@ public class EventRestController {
 		Iterator<TMEvent> it = eventList.iterator();
 		while (it.hasNext()) {
 			TMEvent event = it.next();
-			// EventDTO dto = BeanMapper.map(event, EventDTO.class);
-			// dto.setStartUsersModelList(event.getStartUsers());
-			// dto.setOwnersModelList(event.getOwner());
-			// dto.setParticipantModelList(event.getParticipant());
-			// dto.setCourtsModelList(event.getCourtList());
-			// dto.setEvaluatesModelList(event.getComments());
 			eventDtoList.add(EventDTO.createByEvent4List(event));
 		}
-
-		return eventDtoList;
+		if (eventDtoList.isEmpty()) {
+			logger.warn("Event list is empty");
+			return new ResponseEntity(HttpStatus.NOT_FOUND);
+		}
+		
+		EventListDTO listDto = new EventListDTO(); 
+		listDto.setEvent_Event_List(eventDtoList);
+		
+		return new ResponseEntity(listDto, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
