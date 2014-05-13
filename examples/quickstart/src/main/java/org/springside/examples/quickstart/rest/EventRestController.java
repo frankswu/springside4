@@ -100,8 +100,9 @@ public class EventRestController {
 		return new ResponseEntity(EventDetailDTO.createByEvent4Detail(event), HttpStatus.OK);
 	}
 
-	// @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	// @ResponseBody
+	// TODO frankswu : 活动信息提交 
+	 @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	 @ResponseBody
 	public ResponseEntity<?> create(@RequestBody TMEvent TMEvent, UriComponentsBuilder uriBuilder) {
 		// 调用JSR303 Bean Validator进行校验, 异常将由RestExceptionHandler统一处理.
 		BeanValidators.validateWithException(validator, TMEvent);
@@ -118,7 +119,8 @@ public class EventRestController {
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 
-	// @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+		// TODO frankswu : 活动信息提交 
+	 @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> update(@RequestBody TMEvent TMEvent) {
 		// 调用JSR303 Bean Validator进行校验, 异常将由RestExceptionHandler统一处理.
 		BeanValidators.validateWithException(validator, TMEvent);

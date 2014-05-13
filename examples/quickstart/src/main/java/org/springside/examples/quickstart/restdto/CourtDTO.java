@@ -10,6 +10,8 @@ public class CourtDTO {
 
 	/**  */
 	private long id;
+	/** 场地名称 */
+	private String title;
 	/** 场地地址 */
 	private String address;
 	/** 联系电话 */
@@ -34,6 +36,14 @@ public class CourtDTO {
 	private TMBaseCity city;
 	/** 区县id */
 	private TMBaseCity district;
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 	/** get */
 	public long getId() {
