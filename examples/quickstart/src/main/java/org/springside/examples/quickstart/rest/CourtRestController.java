@@ -31,6 +31,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springside.examples.quickstart.entity.TMCourt;
 import org.springside.examples.quickstart.restdto.CourtDTO;
+import org.springside.examples.quickstart.restdto.CourtListDTO;
 import org.springside.examples.quickstart.service.tennis.CourtService;
 import org.springside.modules.beanvalidator.BeanValidators;
 import org.springside.modules.web.Servlets;
@@ -68,7 +69,7 @@ public class CourtRestController {
 
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public List<CourtDTO> list(@RequestParam(value = "page", defaultValue = "1") int page,
+	public ResponseEntity<?> list(@RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "page.size", defaultValue = "5") int pageSize,
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType, ServletRequest request) {
 		Map<String, Object> searchParams = Servlets.getParametersStartingWith(request, "filter_");
@@ -80,8 +81,12 @@ public class CourtRestController {
 			TMCourt court = it.next();
 			courtDTOList.add(CourtDTO.createByCourt4(court));
 		}
+		if (courtDTOList.isEmpty()) {
+			logger.warn("court list is emtpy");
+			return new ResponseEntity(HttpStatus.NOT_FOUND);
+		}
 
-		return courtDTOList;
+		return new ResponseEntity(new CourtListDTO(courtDTOList), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

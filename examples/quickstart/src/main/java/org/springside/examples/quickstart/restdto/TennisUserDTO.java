@@ -1,9 +1,10 @@
 package org.springside.examples.quickstart.restdto;
 
-import org.springframework.util.MultiValueMap;
 import org.springside.examples.quickstart.entity.TMBaseEnum;
 import org.springside.examples.quickstart.entity.TMTennisUser;
 import org.springside.modules.mapper.BeanMapper;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class TennisUserDTO {
 
@@ -12,18 +13,18 @@ public class TennisUserDTO {
 	private String name;
 	private String roles;
 	private String registerDate;
-	/** 性别 0代表男士 1代表女士 */
-	private TMBaseEnum gender;
 	/** 头像 */
 	private String phote;
 	/** 联系电话 */
 	private String phone;
-	/** 登陆状态 0 在线 1 不在线 2 黑名单 */
-	private TMBaseEnum state;
 	/** 积分 */
 	private String integral;
 	/** 等级 */
 	private String accountLevel;
+	/** 性别 0代表男士 1代表女士 */
+	private TMBaseEnum gender;
+	/** 登陆状态 0 在线 1 不在线 2 黑名单 */
+	private TMBaseEnum state;
 
 	public long getId() {
 		return id;
@@ -57,7 +58,12 @@ public class TennisUserDTO {
 		this.registerDate = registerDate;
 	}
 
+	@JsonIgnore
 	public TMBaseEnum getGender() {
+		return gender;
+	}
+
+	public TMBaseEnum getGender_BaseEnum_Model() {
 		return gender;
 	}
 
@@ -81,7 +87,12 @@ public class TennisUserDTO {
 		this.phone = phone;
 	}
 
+	@JsonIgnore
 	public TMBaseEnum getState() {
+		return state;
+	}
+
+	public TMBaseEnum getState_BaseEnum_Model() {
 		return state;
 	}
 
@@ -117,6 +128,5 @@ public class TennisUserDTO {
 		TennisUserDTO userDTO = BeanMapper.map(user, TennisUserDTO.class);
 		return userDTO;
 	}
-
 
 }

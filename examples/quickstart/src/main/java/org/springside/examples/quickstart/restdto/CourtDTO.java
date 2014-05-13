@@ -156,7 +156,12 @@ public class CourtDTO {
 	}
 
 	/** get 城市id */
+	@JsonIgnore
 	public TMBaseCity getCity() {
+		return this.city;
+	}
+
+	public TMBaseCity getCity_BaseCity_Model() {
 		return this.city;
 	}
 
@@ -176,6 +181,11 @@ public class CourtDTO {
 	}
 
 	/** get 区县id */
+	public TMBaseCity getDistrict_BaseCity_Model() {
+		return this.district;
+	}
+
+	@JsonIgnore
 	public TMBaseCity getDistrict() {
 		return this.district;
 	}

@@ -8,6 +8,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
@@ -30,36 +31,36 @@ import com.google.common.collect.Lists;
 @Table(name = "tb_court")
 public class TMCourt extends IdEntity {
 
-    /** 场地名称 */
+	/** 场地名称 */
 	private String title;
-    /** 场地地址 */
-    private String address;
-    /** 城市id TODO 城市和区县，可以用一张表 */
-    private TMBaseCity city;
-    /** 区县id */
-    private TMBaseCity district;
-    /** 联系电话 */
-    private String phone;
-    /** 开始时间 */
-    private String startTime;
-    /** 结束时间 */
-    private String endTime;
-    /** 收费标准 */
-    private String fee;
-    /** 场地情况 */
-    private String courtDesc;
-    /** 场地片数 */
-    private String courtCount;
-    /** 权重 */
-    private String weights;
-    /** 经度 */
-    private double longitude;
-    /** 纬度 */
-    private double latitude;
-    /** 评价 */
-    private List<TMEvaluate> evaluates = Lists.newArrayList();
-    /** 图片 */
-    private List<TMImage> imageList = Lists.newArrayList();
+	/** 场地地址 */
+	private String address;
+	/** 联系电话 */
+	private String phone;
+	/** 开始时间 */
+	private String startTime;
+	/** 结束时间 */
+	private String endTime;
+	/** 收费标准 */
+	private String fee;
+	/** 场地情况 */
+	private String courtDesc;
+	/** 场地片数 */
+	private String courtCount;
+	/** 权重 */
+	private String weights;
+	/** 经度 */
+	private double longitude;
+	/** 纬度 */
+	private double latitude;
+	/** 城市id TODO 城市和区县，可以用一张表 */
+	private TMBaseCity city;
+	/** 区县id */
+	private TMBaseCity district;
+	/** 评价 */
+	private List<TMEvaluate> evaluates = Lists.newArrayList();
+	/** 图片 */
+	private List<TMImage> imageList = Lists.newArrayList();
 
 	@NotBlank
 	public String getAddress() {
@@ -120,7 +121,6 @@ public class TMCourt extends IdEntity {
 		this.courtCount = courtCount;
 	}
 
-
 	public String getWeights() {
 		return weights;
 	}
@@ -148,7 +148,13 @@ public class TMCourt extends IdEntity {
 	@NotNull
 	@OneToOne
 	@JoinColumn(name = "city_id")
+	@JsonIgnore
 	public TMBaseCity getCity() {
+		return city;
+	}
+
+	@Transient
+	public TMBaseCity getCity_BaseCity_Model() {
 		return city;
 	}
 
@@ -159,7 +165,13 @@ public class TMCourt extends IdEntity {
 	@NotNull
 	@OneToOne
 	@JoinColumn(name = "district_id")
+	@JsonIgnore
 	public TMBaseCity getDistrict() {
+		return district;
+	}
+
+	@Transient
+	public TMBaseCity getDistrict_BaseCity_Model() {
 		return district;
 	}
 
@@ -177,10 +189,10 @@ public class TMCourt extends IdEntity {
 	}
 
 	@ManyToMany
-	@JoinTable(name="tb_court_evaluate",joinColumns={@JoinColumn(name="court_id")},inverseJoinColumns={@JoinColumn(name="evaluate_id")})
-	@Fetch(value=FetchMode.SUBSELECT)
-	@OrderBy(clause="id desc")
-	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
+	@JoinTable(name = "tb_court_evaluate", joinColumns = { @JoinColumn(name = "court_id") }, inverseJoinColumns = { @JoinColumn(name = "evaluate_id") })
+	@Fetch(value = FetchMode.SUBSELECT)
+	@OrderBy(clause = "id desc")
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	@JsonIgnore
 	public List<TMEvaluate> getEvaluates() {
 		return evaluates;
@@ -190,12 +202,11 @@ public class TMCourt extends IdEntity {
 		this.evaluates = evaluates;
 	}
 
-	
 	@ManyToMany
-	@JoinTable(name="tb_court_images",joinColumns={@JoinColumn(name="court_id")},inverseJoinColumns={@JoinColumn(name="image_id")})
-	@Fetch(value=FetchMode.SUBSELECT)
-	@OrderBy(clause="id desc")
-	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
+	@JoinTable(name = "tb_court_images", joinColumns = { @JoinColumn(name = "court_id") }, inverseJoinColumns = { @JoinColumn(name = "image_id") })
+	@Fetch(value = FetchMode.SUBSELECT)
+	@OrderBy(clause = "id desc")
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	@JsonIgnore
 	public List<TMImage> getImageList() {
 		return imageList;
@@ -204,5 +215,5 @@ public class TMCourt extends IdEntity {
 	public void setImageList(List<TMImage> imageList) {
 		this.imageList = imageList;
 	}
-	
+
 }

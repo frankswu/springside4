@@ -12,7 +12,6 @@ import org.springside.modules.utils.Collections3;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
 public class EventDTO {
 
 	/**  */
@@ -197,7 +196,13 @@ public class EventDTO {
 	}
 
 	/** get 分类 */
+	@JsonIgnore
 	public TMBaseEnum getCategory() {
+		return this.category;
+	}
+
+	/** get 分类 */
+	public TMBaseEnum getCategory_BaseEnum_Model() {
 		return this.category;
 	}
 
@@ -217,7 +222,13 @@ public class EventDTO {
 	}
 
 	/** get 状态：2审核中，1未完成，0已完成 */
+	@JsonIgnore
 	public TMBaseEnum getStatues() {
+		return this.statues;
+	}
+
+	/** get 状态：2审核中，1未完成，0已完成 */
+	public TMBaseEnum getStatues_BaseEnum_Model() {
 		return this.statues;
 	}
 

@@ -31,6 +31,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.springside.examples.quickstart.entity.TMTennisUser;
 import org.springside.examples.quickstart.restdto.TennisUserDTO;
 import org.springside.examples.quickstart.restdto.TennisUserDetailDTO;
+import org.springside.examples.quickstart.restdto.TennisUserListDTO;
 import org.springside.examples.quickstart.service.tennis.TenniesUserService;
 import org.springside.modules.beanvalidator.BeanValidators;
 import org.springside.modules.web.Servlets;
@@ -68,7 +69,7 @@ public class TenniesUserRestController {
 
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public List<TennisUserDTO> list(@RequestParam(value = "page", defaultValue = "1") int page,
+	public ResponseEntity list(@RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "page.size", defaultValue = "5") int pageSize,
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType, ServletRequest request) {
 		Map<String, Object> searchParams = Servlets.getParametersStartingWith(request, "filter_");
@@ -82,7 +83,11 @@ public class TenniesUserRestController {
 			tennisUserDTOList.add(TennisUserDTO.createByTennisUser4List(user));
 		}
 
-		return tennisUserDTOList;
+		if (tennisUserDTOList.isEmpty()) {
+			logger.warn("TennisUser list is empty");
+			return new ResponseEntity(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity(new TennisUserListDTO(tennisUserDTOList), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

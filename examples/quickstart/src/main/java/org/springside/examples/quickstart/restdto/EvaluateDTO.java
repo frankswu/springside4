@@ -57,7 +57,7 @@ public class EvaluateDTO {
 	}
 
 	/** get 评论分类 */
-	public TMBaseEnum getCategory() {
+	public TMBaseEnum getCategory_BaseEnum_Model() {
 		return this.evaluateCategory;
 	}
 
