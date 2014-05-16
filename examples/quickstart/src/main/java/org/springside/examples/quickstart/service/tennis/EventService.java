@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.quickstart.entity.TMEvent;
 import org.springside.examples.quickstart.repository.EventDao;
 import org.springside.examples.quickstart.restdto.EventDTO;
-import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.persistence.DynamicSpecifications;
 import org.springside.modules.persistence.SearchFilter;
 import org.springside.modules.persistence.SearchFilter.Operator;
@@ -33,7 +32,9 @@ public class EventService {
 		return eventDao.findOne(id);
 	}
 
-	public void saveTMEvent(TMEvent entity) {
+	public void saveEvent(TMEvent entity) {
+		// TODO frankswu 保存任务
+		// 需要先判断相应的关联的，球友，评论，场地是否有id，保存
 		eventDao.save(entity);
 	}
 
@@ -45,18 +46,18 @@ public class EventService {
 		return (List<TMEvent>) eventDao.findAll();
 	}
 
-	public Page<TMEvent> getMoreEventPageList(Long userId, Map<String, Object> searchParams, int pageNumber, int pageSize,
-			String sortType) {
+	public Page<TMEvent> getMoreEventPageList(Long userId, Map<String, Object> searchParams, int pageNumber,
+			int pageSize, String sortType) {
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
 		Specification<TMEvent> spec = buildSpecification(userId, searchParams);
 
 		return eventDao.findAll(spec, pageRequest);
 	}
 
-	public List<EventDTO> getMoreEventDTOPageList(Long userId, Map<String, Object> searchParams, int pageNumber, int pageSize,
-			String sortType) {
-		List<EventDTO>  eventDtoList = new ArrayList<EventDTO>();
-		Page<TMEvent> eventList =  getMoreEventPageList(null,searchParams, pageNumber,pageSize,sortType);
+	public List<EventDTO> getMoreEventDTOPageList(Long userId, Map<String, Object> searchParams, int pageNumber,
+			int pageSize, String sortType) {
+		List<EventDTO> eventDtoList = new ArrayList<EventDTO>();
+		Page<TMEvent> eventList = getMoreEventPageList(null, searchParams, pageNumber, pageSize, sortType);
 		Iterator<TMEvent> it = eventList.iterator();
 		while (it.hasNext()) {
 			TMEvent event = it.next();

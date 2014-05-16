@@ -268,9 +268,10 @@ public class EventDTO {
 	}
 
 	/** get // 发起者 */
-	// public List<TMTennisUser> getOwnersModelList(){
-	// return this.ownersModelList;
-	// }
+	@JsonIgnore
+	public List<TMTennisUser> getOwnersModelList() {
+		return this.ownersModelList;
+	}
 
 	/** set // 发起者 */
 	public void setOwnersModelList(List<TMTennisUser> ownersModelList) {
@@ -287,9 +288,10 @@ public class EventDTO {
 	}
 
 	/** get // 参与者 */
-	// public List<TMTennisUser> getParticipantModelList(){
-	// return this.participantModelList;
-	// }
+	@JsonIgnore
+	public List<TMTennisUser> getParticipantModelList() {
+		return this.participantModelList;
+	}
 
 	/** set // 参与者 */
 	public void setParticipantModelList(List<TMTennisUser> participantModelList) {
@@ -306,9 +308,10 @@ public class EventDTO {
 	}
 
 	/** get 评论 */
-	// public List<TMEvaluate> getEvaluatesModelList(){
-	// return this.evaluatesModelList;
-	// }
+	@JsonIgnore
+	public List<TMEvaluate> getEvaluatesModelList() {
+		return this.commentsModelList;
+	}
 
 	/** set 评论 */
 	public void setEvaluatesModelList(List<TMEvaluate> evaluatesModelList) {
@@ -325,9 +328,10 @@ public class EventDTO {
 	}
 
 	/** get 场地 */
-	// public List<TMCourt> getCourtsModelList(){
-	// return this.courtsModelList;
-	// }
+	@JsonIgnore
+	public List<TMCourt> getCourtsModelList() {
+		return this.courtsModelList;
+	}
 
 	/** set 场地 */
 	public void setCourtsModelList(List<TMCourt> courtsModelList) {
