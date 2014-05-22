@@ -32,6 +32,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.springside.examples.quickstart.entity.TMCourt;
 import org.springside.examples.quickstart.restdto.CourtDTO;
 import org.springside.examples.quickstart.restdto.CourtListDTO;
+import org.springside.examples.quickstart.restdto.CourtWrapDTO;
 import org.springside.examples.quickstart.service.tennis.CourtService;
 import org.springside.modules.beanvalidator.BeanValidators;
 import org.springside.modules.web.Servlets;
@@ -97,7 +98,7 @@ public class CourtRestController {
 			logger.warn("court with id {} not found", id);
 			return new ResponseEntity(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity(CourtDTO.createByCourt4(court), HttpStatus.OK);
+		return new ResponseEntity(new CourtWrapDTO(CourtDTO.createByCourt4(court)), HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

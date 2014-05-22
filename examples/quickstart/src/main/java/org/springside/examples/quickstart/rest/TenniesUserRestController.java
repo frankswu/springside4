@@ -31,6 +31,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.springside.examples.quickstart.entity.TMTennisUser;
 import org.springside.examples.quickstart.restdto.TennisUserDTO;
 import org.springside.examples.quickstart.restdto.TennisUserDetailDTO;
+import org.springside.examples.quickstart.restdto.TennisUserDetailWrapDTO;
 import org.springside.examples.quickstart.restdto.TennisUserListDTO;
 import org.springside.examples.quickstart.service.tennis.TenniesUserService;
 import org.springside.modules.beanvalidator.BeanValidators;
@@ -98,12 +99,13 @@ public class TenniesUserRestController {
 			logger.warn("TMTennisUser with id {} not found", id);
 			return new ResponseEntity(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity(TennisUserDetailDTO.createByTennisUser4Detail(tennisUser), HttpStatus.OK);
+		return new ResponseEntity(
+				new TennisUserDetailWrapDTO(TennisUserDetailDTO.createByTennisUser4Detail(tennisUser)), HttpStatus.OK);
 	}
 
 	// TODO frankswu : 用户信息提交
-	 @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	 @ResponseBody
+	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
 	public ResponseEntity<?> create(@RequestBody TMTennisUser tennisUser, UriComponentsBuilder uriBuilder) {
 		// 调用JSR303 Bean Validator进行校验, 异常将由RestExceptionHandler统一处理.
 		BeanValidators.validateWithException(validator, tennisUser);
@@ -120,8 +122,8 @@ public class TenniesUserRestController {
 		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
 
-		// TODO frankswu : 用户信息修正
-	 @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	// TODO frankswu : 用户信息修正
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> update(@RequestBody TMTennisUser tennisUser) {
 		// 调用JSR303 Bean Validator进行校验, 异常将由RestExceptionHandler统一处理.
 		BeanValidators.validateWithException(validator, tennisUser);

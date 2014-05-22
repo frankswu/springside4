@@ -29,6 +29,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.springside.examples.quickstart.entity.TMEvent;
 import org.springside.examples.quickstart.restdto.EventDTO;
 import org.springside.examples.quickstart.restdto.EventDetailDTO;
+import org.springside.examples.quickstart.restdto.EventDetailWrapDTO;
 import org.springside.examples.quickstart.restdto.EventListDTO;
 import org.springside.examples.quickstart.service.tennis.EventService;
 import org.springside.modules.beanvalidator.BeanValidators;
@@ -96,7 +97,7 @@ public class EventRestController {
 			logger.warn("TMEvent with id {} not found", id);
 			return new ResponseEntity(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity(EventDetailDTO.createByEvent4Detail(event), HttpStatus.OK);
+		return new ResponseEntity(new EventDetailWrapDTO(EventDetailDTO.createByEvent4Detail(event)), HttpStatus.OK);
 	}
 
 	// TODO frankswu : 活动信息提交
