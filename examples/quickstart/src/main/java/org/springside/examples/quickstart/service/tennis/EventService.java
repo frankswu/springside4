@@ -14,6 +14,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.quickstart.entity.TMEvent;
+import org.springside.examples.quickstart.repository.BaseEnumDao;
 import org.springside.examples.quickstart.repository.CourtDao;
 import org.springside.examples.quickstart.repository.EvaluateDao;
 import org.springside.examples.quickstart.repository.EventDao;
@@ -30,6 +31,7 @@ import org.springside.modules.persistence.SearchFilter.Operator;
 public class EventService {
 
 	private EventDao eventDao;
+	private BaseEnumDao baseEnumDao;
 	private CourtDao courtDao;
 	private EvaluateDao evaluateDao;
 	private TenniesUserDao tenniesUserDao;
@@ -41,7 +43,12 @@ public class EventService {
 	public void saveEvent(TMEvent entity) {
 		// TODO frankswu 保存任务
 		// 需要先判断相应的关联的，球友，评论，场地是否有id，保存
-		entity.getCategory();
+		baseEnumDao.save(entity.getCategory());
+		baseEnumDao.save(entity.getStatues());
+		courtDao.save(entity.getCourtList());
+		evaluateDao.save(entity.getComments());
+//		tenniesUserDao.save(entity.getStartUsersList());
+		
 		eventDao.save(entity);
 	}
 
@@ -119,4 +126,10 @@ public class EventService {
 		this.tenniesUserDao = tenniesUserDao;
 	}
 
+	@Autowired
+	public void setBaseEnumDao(BaseEnumDao baseEnumDao) {
+		this.baseEnumDao = baseEnumDao;
+	}
+
+	
 }

@@ -206,6 +206,10 @@ public class EventDTO {
 		return this.category;
 	}
 
+	public void setCategory_BaseEnum_Model(TMBaseEnum baseEnum) {
+		this.category = baseEnum;
+	}
+	
 	/** set 分类 */
 	public void setCategory(TMBaseEnum categoryModel) {
 		this.category = categoryModel;
@@ -232,6 +236,11 @@ public class EventDTO {
 		return this.statues;
 	}
 
+	/** get 状态：2审核中，1未完成，0已完成 */
+	public void setStatues_BaseEnum_Model(TMBaseEnum baseEnum) {
+		this.statues = baseEnum;
+	}
+
 	/** set 状态：2审核中，1未完成，0已完成 */
 	public void setStatues(TMBaseEnum statuesModel) {
 		this.statues = statuesModel;
@@ -242,11 +251,18 @@ public class EventDTO {
 		return Collections3.extractToList(this.startUsersModelList, "id");
 		// return BeanMapper.mapList(this.startUsersModelList,Long.class);
 	}
+	
+	
 
 	public List<TennisUserDTO> getStartUsers_TennisUser_List() {
 		return BeanMapper.mapList(this.startUsersModelList, TennisUserDTO.class);
 	}
 
+	public void setStartUsers_TennisUser_List(List<TennisUserDTO> tennisUsers) {
+		this.startUsersModelList  = BeanMapper.mapList(tennisUsers, TMTennisUser.class);
+	}
+	
+	
 	/** get 收藏 */
 	@JsonIgnore
 	public List<TMTennisUser> getStartUsersModelList() {
@@ -267,6 +283,10 @@ public class EventDTO {
 		return BeanMapper.mapList(this.ownersModelList, TennisUserDTO.class);
 	}
 
+	public void setOwners_TennisUser_List(List<TennisUserDTO> owners) {
+		this.ownersModelList = BeanMapper.mapList(owners, TMTennisUser.class);
+	}
+	
 	/** get // 发起者 */
 	@JsonIgnore
 	public List<TMTennisUser> getOwnersModelList() {
@@ -287,6 +307,11 @@ public class EventDTO {
 		return BeanMapper.mapList(this.participantModelList, TennisUserDTO.class);
 	}
 
+	public void setParticipant_TennisUser_List(List<TennisUserDTO> participant) {
+		this.participantModelList = BeanMapper.mapList(participant, TMTennisUser.class);
+	}
+	
+	
 	/** get // 参与者 */
 	@JsonIgnore
 	public List<TMTennisUser> getParticipantModelList() {
@@ -305,6 +330,10 @@ public class EventDTO {
 
 	public List<EvaluateDTO> getComments_Evaluate_List() {
 		return BeanMapper.mapList(this.commentsModelList, EvaluateDTO.class);
+	}
+
+	public void setComments_Evaluate_List(List<EvaluateDTO> evaluates) {
+		this.commentsModelList = BeanMapper.mapList(evaluates, TMEvaluate.class);
 	}
 
 	/** get 评论 */
@@ -327,6 +356,10 @@ public class EventDTO {
 		return BeanMapper.mapList(this.courtsModelList, CourtDTO.class);
 	}
 
+	public void setCourts_Court_List(List<CourtDTO> courts) {
+		this.courtsModelList = BeanMapper.mapList(courts, TMCourt.class);
+	}
+	
 	/** get 场地 */
 	@JsonIgnore
 	public List<TMCourt> getCourtsModelList() {

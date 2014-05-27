@@ -17,6 +17,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springside.examples.quickstart.restdto.EventDetailDTO;
 import org.springside.examples.quickstart.restdto.TennisUserDTO;
 import org.springside.modules.mapper.BeanMapper;
 
@@ -268,4 +269,16 @@ public class TMEvent extends IdEntity {
 	public void setComments(List<TMEvaluate> comments) {
 		this.comments = comments;
 	}
+	
+	public static TMEvent mapEventDTO2Event(EventDetailDTO eventDto) {
+		TMEvent event = BeanMapper.map(eventDto, TMEvent.class);
+		event.setStartUsers(eventDto.getStartUsersModelList());
+		event.setOwner(eventDto.getOwnersModelList());
+		event.setParticipant(eventDto.getParticipantModelList());
+		event.setComments(eventDto.getEvaluatesModelList());
+		event.setCourtList(eventDto.getCourtsModelList());
+
+		return event;
+	}
+	
 }

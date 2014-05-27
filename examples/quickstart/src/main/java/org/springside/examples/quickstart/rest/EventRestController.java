@@ -108,7 +108,7 @@ public class EventRestController {
 		BeanValidators.validateWithException(validator, eventDto);
 
 		// TODO 接口中暴露DTO，转换成entity : 保存任务
-		eventService.saveEvent(mapEventDTO2Event(eventDto));
+		eventService.saveEvent(TMEvent.mapEventDTO2Event(eventDto));
 
 		// 按照Restful风格约定，创建指向新任务的url, 也可以直接返回id或对象.
 		// Long id = eventDto.getId();
@@ -125,7 +125,7 @@ public class EventRestController {
 		// 调用JSR303 Bean Validator进行校验, 异常将由RestExceptionHandler统一处理.
 		BeanValidators.validateWithException(validator, eventDto);
 		// 保存
-		eventService.saveEvent(mapEventDTO2Event(eventDto));
+		eventService.saveEvent(TMEvent.mapEventDTO2Event(eventDto));
 
 		// 按Restful约定，返回204状态码, 无内容. 也可以返回200状态码.
 		return new ResponseEntity(HttpStatus.NO_CONTENT);
@@ -150,15 +150,15 @@ public class EventRestController {
 		return mav;
 	}
 
-	private TMEvent mapEventDTO2Event(EventDetailDTO eventDto) {
-		TMEvent event = BeanMapper.map(eventDto, TMEvent.class);
-		event.setStartUsers(eventDto.getStartUsersModelList());
-		event.setOwner(eventDto.getOwnersModelList());
-		event.setParticipant(eventDto.getParticipantModelList());
-		event.setComments(eventDto.getEvaluatesModelList());
-		event.setCourtList(eventDto.getCourtsModelList());
-		// TODO Auto-generated method stub
-		return event;
-	}
+//	private TMEvent mapEventDTO2Event(EventDetailDTO eventDto) {
+//		TMEvent event = BeanMapper.map(eventDto, TMEvent.class);
+//		event.setStartUsers(eventDto.getStartUsersModelList());
+//		event.setOwner(eventDto.getOwnersModelList());
+//		event.setParticipant(eventDto.getParticipantModelList());
+//		event.setComments(eventDto.getEvaluatesModelList());
+//		event.setCourtList(eventDto.getCourtsModelList());
+//		// TODO Auto-generated method stub
+//		return event;
+//	}
 
 }
