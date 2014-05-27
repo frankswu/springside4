@@ -14,7 +14,10 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.quickstart.entity.TMEvent;
+import org.springside.examples.quickstart.repository.CourtDao;
+import org.springside.examples.quickstart.repository.EvaluateDao;
 import org.springside.examples.quickstart.repository.EventDao;
+import org.springside.examples.quickstart.repository.TenniesUserDao;
 import org.springside.examples.quickstart.restdto.EventDTO;
 import org.springside.modules.persistence.DynamicSpecifications;
 import org.springside.modules.persistence.SearchFilter;
@@ -27,6 +30,9 @@ import org.springside.modules.persistence.SearchFilter.Operator;
 public class EventService {
 
 	private EventDao eventDao;
+	private CourtDao courtDao;
+	private EvaluateDao evaluateDao;
+	private TenniesUserDao tenniesUserDao;
 
 	public TMEvent getTMEvent(Long id) {
 		return eventDao.findOne(id);
@@ -35,6 +41,7 @@ public class EventService {
 	public void saveEvent(TMEvent entity) {
 		// TODO frankswu 保存任务
 		// 需要先判断相应的关联的，球友，评论，场地是否有id，保存
+		entity.getCategory();
 		eventDao.save(entity);
 	}
 
@@ -96,4 +103,20 @@ public class EventService {
 	public void setEventDao(EventDao EventDao) {
 		this.eventDao = EventDao;
 	}
+
+	@Autowired
+	public void setCourtDao(CourtDao courtDao) {
+		this.courtDao = courtDao;
+	}
+
+	@Autowired
+	public void setEvaluateDao(EvaluateDao evaluateDao) {
+		this.evaluateDao = evaluateDao;
+	}
+
+	@Autowired
+	public void setTenniesUserDao(TenniesUserDao tenniesUserDao) {
+		this.tenniesUserDao = tenniesUserDao;
+	}
+
 }

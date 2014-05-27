@@ -100,7 +100,7 @@ public class EventRestController {
 		return new ResponseEntity(new EventDetailWrapDTO(EventDetailDTO.createByEvent4Detail(event)), HttpStatus.OK);
 	}
 
-	// TODO frankswu : 活动信息提交
+	// 活动信息提交
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ResponseEntity<?> create(@RequestBody EventDetailDTO eventDto, UriComponentsBuilder uriBuilder) {
