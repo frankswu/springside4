@@ -295,6 +295,15 @@
 			<version>${guava.version}</version>
 		</dependency>
 		<!-- GENERAL UTILS end -->
+		
+		<!-- AES UTILS begin : FRANKSWU ADD -->
+		<dependency>
+		    <groupId>org.cryptonode.jncryptor</groupId>
+		    <artifactId>jncryptor</artifactId>
+		    <version>1.0.1</version>
+		</dependency>
+		<!-- AES UTILS end -->
+		
 
 		<!-- TEST begin -->
 		<dependency>
