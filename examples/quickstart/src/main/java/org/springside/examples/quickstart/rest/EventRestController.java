@@ -9,6 +9,10 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Validator;
 
+import org.cryptonode.jncryptor.AES256JNCryptor;
+import org.cryptonode.jncryptor.CryptorException;
+import org.cryptonode.jncryptor.InvalidHMACException;
+import org.cryptonode.jncryptor.JNCryptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -134,8 +138,24 @@ public class EventRestController {
 	public ResponseEntity<?> aesDemo(@RequestBody String context) {
 
 		logger.debug("before[" + context + "]");
+		// JNCryptor cryptor = new AES256JNCryptor();
+		String password = "secretsquirrel";
+		String context2 = new String(decryptData(context.getBytes(), password));
+		logger.debug("after[" + context2 + "]");
+		return null;
+	}
 
-		logger.debug("after[" + context + "]");
+	private static byte[] decryptData(byte[] ciphertext, String password) {
+		JNCryptor cryptor = new AES256JNCryptor();
+		try {
+			return cryptor.decryptData(ciphertext, password.toCharArray());
+		} catch (InvalidHMACException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (CryptorException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
