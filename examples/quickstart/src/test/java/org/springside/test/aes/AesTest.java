@@ -9,15 +9,15 @@ public class AesTest {
 	public static void main(String[] args) {
 		JNCryptor cryptor = new AES256JNCryptor();
 		byte[] plaintext = "Hello, World!".getBytes();
-		String password = "secretsquirrel";
+		String password = "freeteam";
 
 		try {
-			System.out.println(new String(plaintext));
+			printByteArray(plaintext);
 			byte[] ciphertext = cryptor.encryptData(plaintext, password.toCharArray());
-			System.out.println(new String(ciphertext));
+			printByteArray(ciphertext);
 
 			byte[] plaintext2 = decryptData(ciphertext, password);
-			System.out.println(new String(plaintext2));
+			printByteArray(plaintext2);
 
 		} catch (CryptorException e) {
 			// Something went wrong
@@ -31,4 +31,12 @@ public class AesTest {
 
 	}
 
+	
+	private static void printByteArray(byte[] byteArray) {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < byteArray.length; i++) {
+			System.out.print(byteArray[i]);
+		}
+		System.out.println();
+	}
 }

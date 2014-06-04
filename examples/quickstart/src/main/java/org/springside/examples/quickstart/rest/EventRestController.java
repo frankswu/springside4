@@ -1,5 +1,7 @@
 package org.springside.examples.quickstart.rest;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -136,13 +138,35 @@ public class EventRestController {
 
 	@RequestMapping(value = "/demo1", method = RequestMethod.POST)
 	public ResponseEntity<?> aesDemo(@RequestBody String context) {
-
 		logger.debug("before[" + context + "]");
 		// JNCryptor cryptor = new AES256JNCryptor();
-		String password = "secretsquirrel";
+		String password = "freeteam";
 		String context2 = new String(decryptData(context.getBytes(), password));
 		logger.debug("after[" + context2 + "]");
-		return null;
+		return new ResponseEntity(context2, HttpStatus.OK);
+	}
+
+
+	@RequestMapping(value = "/demo2", method = RequestMethod.POST)
+	public ResponseEntity<?> aesAndMd5Demo(@RequestBody String context) {
+		logger.debug("before[" + context + "]");
+		String password = "demo2freeteam";
+        StringBuffer sb = new StringBuffer();
+		try {
+			MessageDigest md5 = MessageDigest.getInstance("MD5");
+			byte[] array = md5.digest(password.getBytes("utf-8"));
+	        for (int i = 0; i < array.length; ++i) {
+	          sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
+	       }
+	 			
+			
+		} catch (Exception e) {
+			return new ResponseEntity((e.getMessage()+","+e.getStackTrace()[0].toString()).getBytes(), HttpStatus.OK);
+		} 
+		
+		String context2 = new String(decryptData(context.getBytes(), sb.toString()));
+		logger.debug("after[" + context2 + "]");
+		return new ResponseEntity(context2, HttpStatus.OK);
 	}
 
 	private static byte[] decryptData(byte[] ciphertext, String password) {
@@ -150,19 +174,11 @@ public class EventRestController {
 		try {
 			return cryptor.decryptData(ciphertext, password.toCharArray());
 		} catch (InvalidHMACException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return (e.getMessage()+","+e.getStackTrace()[0].toString()).getBytes();
 		} catch (CryptorException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return (e.getMessage()+","+e.getStackTrace()[0].toString()).getBytes();
 		}
-		return null;
-	}
 
-	@RequestMapping(value = "/demo2", method = RequestMethod.POST)
-	public ResponseEntity<?> aesAndMd5Demo() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	// @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
