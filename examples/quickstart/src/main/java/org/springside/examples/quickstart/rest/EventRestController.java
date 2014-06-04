@@ -33,7 +33,6 @@ import org.springside.examples.quickstart.restdto.EventDetailWrapDTO;
 import org.springside.examples.quickstart.restdto.EventListDTO;
 import org.springside.examples.quickstart.service.tennis.EventService;
 import org.springside.modules.beanvalidator.BeanValidators;
-import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.Servlets;
 
 /**
@@ -131,6 +130,21 @@ public class EventRestController {
 		return new ResponseEntity(HttpStatus.NO_CONTENT);
 	}
 
+	@RequestMapping(value = "/demo1", method = RequestMethod.POST)
+	public ResponseEntity<?> aesDemo(@RequestBody String context) {
+
+		logger.debug("before[" + context + "]");
+
+		logger.debug("after[" + context + "]");
+		return null;
+	}
+
+	@RequestMapping(value = "/demo2", method = RequestMethod.POST)
+	public ResponseEntity<?> aesAndMd5Demo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	// @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	// @ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("id") Long id) {
@@ -150,15 +164,15 @@ public class EventRestController {
 		return mav;
 	}
 
-//	private TMEvent mapEventDTO2Event(EventDetailDTO eventDto) {
-//		TMEvent event = BeanMapper.map(eventDto, TMEvent.class);
-//		event.setStartUsers(eventDto.getStartUsersModelList());
-//		event.setOwner(eventDto.getOwnersModelList());
-//		event.setParticipant(eventDto.getParticipantModelList());
-//		event.setComments(eventDto.getEvaluatesModelList());
-//		event.setCourtList(eventDto.getCourtsModelList());
-//		// TODO Auto-generated method stub
-//		return event;
-//	}
+	// private TMEvent mapEventDTO2Event(EventDetailDTO eventDto) {
+	// TMEvent event = BeanMapper.map(eventDto, TMEvent.class);
+	// event.setStartUsers(eventDto.getStartUsersModelList());
+	// event.setOwner(eventDto.getOwnersModelList());
+	// event.setParticipant(eventDto.getParticipantModelList());
+	// event.setComments(eventDto.getEvaluatesModelList());
+	// event.setCourtList(eventDto.getCourtsModelList());
+	// // TODO Auto-generated method stub
+	// return event;
+	// }
 
 }
