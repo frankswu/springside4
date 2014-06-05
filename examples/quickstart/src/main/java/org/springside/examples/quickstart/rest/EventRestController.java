@@ -1,7 +1,6 @@
 package org.springside.examples.quickstart.rest;
 
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -49,6 +48,14 @@ import org.springside.modules.web.Servlets;
  * 
  * 活动詳情<br>
  * method:get http://218.244.146.177:8080/quickstart/api/v1/event/1<br>
+ * 
+ * 加密测试url方案一，都返回解密之后的字符串，或者是报错信息<br>
+ * 都使用post方面 ，password=freeteam<br>
+ * http://218.244.146.177:8080/quickstart/api/v1/event/demo1<br>
+ * 
+ * 加密测试url方案二，都返回解密之后的字符串，或者是报错信息<br>
+ * 都使用post方面 ，password=demo2freeteam,然后md5一下，转16进制字符串<br>
+ * http://218.244.146.177:8080/quickstart/api/v1/event/demo2<br>
  * 
  * Create page : GET /api/v1/event/create <br>
  * Create action : POST /api/v1/event/ <br>
@@ -146,24 +153,23 @@ public class EventRestController {
 		return new ResponseEntity(context2, HttpStatus.OK);
 	}
 
-
 	@RequestMapping(value = "/demo2", method = RequestMethod.POST)
 	public ResponseEntity<?> aesAndMd5Demo(@RequestBody String context) {
 		logger.debug("before[" + context + "]");
 		String password = "demo2freeteam";
-        StringBuffer sb = new StringBuffer();
+		StringBuffer sb = new StringBuffer();
 		try {
 			MessageDigest md5 = MessageDigest.getInstance("MD5");
 			byte[] array = md5.digest(password.getBytes("utf-8"));
-	        for (int i = 0; i < array.length; ++i) {
-	          sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
-	       }
-	 			
-			
+			for (int i = 0; i < array.length; ++i) {
+				sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1, 3));
+			}
+
 		} catch (Exception e) {
-			return new ResponseEntity((e.getMessage()+","+e.getStackTrace()[0].toString()).getBytes(), HttpStatus.OK);
-		} 
-		
+			return new ResponseEntity((e.getMessage() + "," + e.getStackTrace()[0].toString()).getBytes(),
+					HttpStatus.OK);
+		}
+
 		String context2 = new String(decryptData(context.getBytes(), sb.toString()));
 		logger.debug("after[" + context2 + "]");
 		return new ResponseEntity(context2, HttpStatus.OK);
@@ -174,9 +180,9 @@ public class EventRestController {
 		try {
 			return cryptor.decryptData(ciphertext, password.toCharArray());
 		} catch (InvalidHMACException e) {
-			return (e.getMessage()+","+e.getStackTrace()[0].toString()).getBytes();
+			return (e.getMessage() + "," + e.getStackTrace()[0].toString()).getBytes();
 		} catch (CryptorException e) {
-			return (e.getMessage()+","+e.getStackTrace()[0].toString()).getBytes();
+			return (e.getMessage() + "," + e.getStackTrace()[0].toString()).getBytes();
 		}
 
 	}
