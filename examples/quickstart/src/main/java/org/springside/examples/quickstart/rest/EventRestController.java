@@ -39,6 +39,7 @@ import org.springside.examples.quickstart.restdto.EventListDTO;
 import org.springside.examples.quickstart.service.tennis.EventService;
 import org.springside.modules.beanvalidator.BeanValidators;
 import org.springside.modules.web.Servlets;
+import org.springside.utils.AESutils;
 
 /**
  * TMEvent的Restful API的Controller. <br>
@@ -122,12 +123,6 @@ public class EventRestController {
 		// TODO 接口中暴露DTO，转换成entity : 保存任务
 		eventService.saveEvent(TMEvent.mapEventDTO2Event(eventDto));
 
-		// 按照Restful风格约定，创建指向新任务的url, 也可以直接返回id或对象.
-		// Long id = eventDto.getId();
-		// URI uri = uriBuilder.path("/api/v1/event/" + id).build().toUri();
-		// HttpHeaders headers = new HttpHeaders();
-		// headers.setLocation(uri);
-
 		return new ResponseEntity(HttpStatus.CREATED);
 	}
 
@@ -148,7 +143,7 @@ public class EventRestController {
 		logger.debug("before[" + context + "]");
 		// JNCryptor cryptor = new AES256JNCryptor();
 		String password = "freeteam";
-		String context2 = new String(decryptData(context.getBytes(), password));
+		String context2 = new String(AESutils.decrypt(context.getBytes(), password));
 		logger.debug("after[" + context2 + "]");
 		return new ResponseEntity(context2, HttpStatus.OK);
 	}
@@ -157,35 +152,17 @@ public class EventRestController {
 	public ResponseEntity<?> aesAndMd5Demo(@RequestBody String context) {
 		logger.debug("before[" + context + "]");
 		String password = "demo2freeteam";
-		StringBuffer sb = new StringBuffer();
-		try {
-			MessageDigest md5 = MessageDigest.getInstance("MD5");
-			byte[] array = md5.digest(password.getBytes("utf-8"));
-			for (int i = 0; i < array.length; ++i) {
-				sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1, 3));
-			}
-
+		String context2 = null;
+		try{
+			context2 = new String(AESutils.decryptData(context.getBytes(), password));
 		} catch (Exception e) {
 			return new ResponseEntity((e.getMessage() + "," + e.getStackTrace()[0].toString()).getBytes(),
 					HttpStatus.OK);
 		}
-
-		String context2 = new String(decryptData(context.getBytes(), sb.toString()));
 		logger.debug("after[" + context2 + "]");
 		return new ResponseEntity(context2, HttpStatus.OK);
 	}
 
-	private static byte[] decryptData(byte[] ciphertext, String password) {
-		JNCryptor cryptor = new AES256JNCryptor();
-		try {
-			return cryptor.decryptData(ciphertext, password.toCharArray());
-		} catch (InvalidHMACException e) {
-			return (e.getMessage() + "," + e.getStackTrace()[0].toString()).getBytes();
-		} catch (CryptorException e) {
-			return (e.getMessage() + "," + e.getStackTrace()[0].toString()).getBytes();
-		}
-
-	}
 
 	// @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	// @ResponseStatus(HttpStatus.NO_CONTENT)
