@@ -29,6 +29,7 @@ import org.cryptonode.jncryptor.AES256JNCryptor;
 import org.cryptonode.jncryptor.CryptorException;
 import org.cryptonode.jncryptor.InvalidHMACException;
 import org.cryptonode.jncryptor.JNCryptor;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -113,19 +114,21 @@ public class AES256JNCryptorTest {
 	 * @throws Exception
 	 */
 	@Test
-	// public void testEncryptionAndDecryption() throws Exception {
-	// String password = "1234";
-	// byte[] plaintext = "Hello, World!".getBytes();
-	//
-	// AES256JNCryptor cryptor = new AES256JNCryptor();
-	// byte[] ciphertext = cryptor.encryptData(plaintext, password.toCharArray());
-	//
-	// // Check version
-	// assertEquals(AES256v3Ciphertext.EXPECTED_VERSION, ciphertext[0]);
-	//
-	// byte[] plaintext2 = cryptor.decryptData(ciphertext, password.toCharArray());
-	// Assert.assertArrayEquals(plaintext, plaintext2);
-	// }
+	public void testEncryptionAndDecryption() throws Exception {
+		String password = "1234";
+		byte[] plaintext = "Hello, World!".getBytes();
+
+		AES256JNCryptor cryptor = new AES256JNCryptor();
+		byte[] ciphertext = cryptor.encryptData(plaintext,
+				password.toCharArray());
+
+		// Check version
+//		assertEquals(AES256v3Ciphertext.EXPECTED_VERSION, ciphertext[0]);
+
+		byte[] plaintext2 = cryptor.decryptData(ciphertext,
+				password.toCharArray());
+		Assert.assertArrayEquals(plaintext, plaintext2);
+ }
 	/**
 	 * Creates a valid ciphertext, modifies the MAC and verifies that the decryption fails.
 	 * 
