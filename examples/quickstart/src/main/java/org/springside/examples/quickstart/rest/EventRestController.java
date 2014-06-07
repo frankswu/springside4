@@ -1,5 +1,6 @@
 package org.springside.examples.quickstart.rest;
 
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -9,6 +10,10 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Validator;
 
+import org.cryptonode.jncryptor.AES256JNCryptor;
+import org.cryptonode.jncryptor.CryptorException;
+import org.cryptonode.jncryptor.InvalidHMACException;
+import org.cryptonode.jncryptor.JNCryptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +38,8 @@ import org.springside.examples.quickstart.restdto.EventDetailWrapDTO;
 import org.springside.examples.quickstart.restdto.EventListDTO;
 import org.springside.examples.quickstart.service.tennis.EventService;
 import org.springside.modules.beanvalidator.BeanValidators;
-import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.web.Servlets;
+import org.springside.utils.AESutils;
 
 /**
  * TMEvent的Restful API的Controller. <br>
@@ -44,6 +49,14 @@ import org.springside.modules.web.Servlets;
  * 
  * 活动詳情<br>
  * method:get http://218.244.146.177:8080/quickstart/api/v1/event/1<br>
+ * 
+ * 加密测试url方案一，都返回解密之后的字符串，或者是报错信息<br>
+ * 都使用post方面 ，password=freeteam<br>
+ * http://218.244.146.177:8080/quickstart/api/v1/event/demo1<br>
+ * 
+ * 加密测试url方案二，都返回解密之后的字符串，或者是报错信息<br>
+ * 都使用post方面 ，password=demo2freeteam,然后md5一下，转16进制字符串<br>
+ * http://218.244.146.177:8080/quickstart/api/v1/event/demo2<br>
  * 
  * Create page : GET /api/v1/event/create <br>
  * Create action : POST /api/v1/event/ <br>
@@ -110,12 +123,6 @@ public class EventRestController {
 		// TODO 接口中暴露DTO，转换成entity : 保存任务
 		eventService.saveEvent(TMEvent.mapEventDTO2Event(eventDto));
 
-		// 按照Restful风格约定，创建指向新任务的url, 也可以直接返回id或对象.
-		// Long id = eventDto.getId();
-		// URI uri = uriBuilder.path("/api/v1/event/" + id).build().toUri();
-		// HttpHeaders headers = new HttpHeaders();
-		// headers.setLocation(uri);
-
 		return new ResponseEntity(HttpStatus.CREATED);
 	}
 
@@ -130,6 +137,32 @@ public class EventRestController {
 		// 按Restful约定，返回204状态码, 无内容. 也可以返回200状态码.
 		return new ResponseEntity(HttpStatus.NO_CONTENT);
 	}
+
+	@RequestMapping(value = "/demo1", method = RequestMethod.POST)
+	public ResponseEntity<?> aesDemo(@RequestBody String context) {
+		logger.debug("before[" + context + "]");
+		// JNCryptor cryptor = new AES256JNCryptor();
+		String password = "freeteam";
+		String context2 = new String(AESutils.decrypt(context.getBytes(), password));
+		logger.debug("after[" + context2 + "]");
+		return new ResponseEntity(context2, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/demo2", method = RequestMethod.POST)
+	public ResponseEntity<?> aesAndMd5Demo(@RequestBody String context) {
+		logger.debug("before[" + context + "]");
+		String password = "demo2freeteam";
+		String context2 = null;
+		try{
+			context2 = new String(AESutils.decryptData(context.getBytes(), password));
+		} catch (Exception e) {
+			return new ResponseEntity((e.getMessage() + "," + e.getStackTrace()[0].toString()).getBytes(),
+					HttpStatus.OK);
+		}
+		logger.debug("after[" + context2 + "]");
+		return new ResponseEntity(context2, HttpStatus.OK);
+	}
+
 
 	// @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	// @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -150,15 +183,15 @@ public class EventRestController {
 		return mav;
 	}
 
-//	private TMEvent mapEventDTO2Event(EventDetailDTO eventDto) {
-//		TMEvent event = BeanMapper.map(eventDto, TMEvent.class);
-//		event.setStartUsers(eventDto.getStartUsersModelList());
-//		event.setOwner(eventDto.getOwnersModelList());
-//		event.setParticipant(eventDto.getParticipantModelList());
-//		event.setComments(eventDto.getEvaluatesModelList());
-//		event.setCourtList(eventDto.getCourtsModelList());
-//		// TODO Auto-generated method stub
-//		return event;
-//	}
+	// private TMEvent mapEventDTO2Event(EventDetailDTO eventDto) {
+	// TMEvent event = BeanMapper.map(eventDto, TMEvent.class);
+	// event.setStartUsers(eventDto.getStartUsersModelList());
+	// event.setOwner(eventDto.getOwnersModelList());
+	// event.setParticipant(eventDto.getParticipantModelList());
+	// event.setComments(eventDto.getEvaluatesModelList());
+	// event.setCourtList(eventDto.getCourtsModelList());
+	// // TODO Auto-generated method stub
+	// return event;
+	// }
 
 }
