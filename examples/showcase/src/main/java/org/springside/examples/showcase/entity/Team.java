@@ -19,9 +19,9 @@ import com.google.common.collect.Lists;
  * 
  * @author calvin
  */
-@Entity
-@Table(name = "ss_team")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+//@Entity
+//@Table(name = "ss_team")
+//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Team extends IdEntity {
 
 	private String name;
@@ -36,9 +36,9 @@ public class Team extends IdEntity {
 		this.name = name;
 	}
 
-	@NotNull
-	@OneToOne
-	@JoinColumn(name = "master_id")
+//	@NotNull
+//	@OneToOne
+//	@JoinColumn(name = "master_id")
 	public User getMaster() {
 		return master;
 	}
@@ -47,7 +47,7 @@ public class Team extends IdEntity {
 		this.master = master;
 	}
 
-	@OneToMany(mappedBy = "team")
+//	@OneToMany(mappedBy = "team")
 	public List<User> getUserList() {
 		return userList;
 	}

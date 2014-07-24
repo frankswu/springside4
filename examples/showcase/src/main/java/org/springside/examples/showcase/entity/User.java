@@ -28,10 +28,10 @@ import com.google.common.collect.Lists;
  * 
  * @author calvin
  */
-@Entity
-@Table(name = "ss_user")
-// 默认的缓存策略.
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+//@Entity
+//@Table(name = "ss_user")
+//// 默认的缓存策略.
+//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class User extends IdEntity {
 	private String loginName;
 	private String plainPassword;
@@ -106,14 +106,14 @@ public class User extends IdEntity {
 	}
 
 	// 多对多定义
-	@ManyToMany
-	@JoinTable(name = "ss_user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
-	// Fecth策略定义
-	@Fetch(FetchMode.SUBSELECT)
-	// 集合按id排序
-	@OrderBy("id ASC")
-	// 缓存策略
-	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+//	@ManyToMany
+//	@JoinTable(name = "ss_user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
+//	// Fecth策略定义
+//	@Fetch(FetchMode.SUBSELECT)
+//	// 集合按id排序
+//	@OrderBy("id ASC")
+//	// 缓存策略
+//	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	public List<Role> getRoleList() {
 		return roleList;
 	}
@@ -122,8 +122,8 @@ public class User extends IdEntity {
 		this.roleList = roleList;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "team_id")
+//	@ManyToOne
+//	@JoinColumn(name = "team_id")
 	public Team getTeam() {
 		return team;
 	}
@@ -132,8 +132,8 @@ public class User extends IdEntity {
 		this.team = team;
 	}
 
-	@Transient
-	@JsonIgnore
+//	@Transient
+//	@JsonIgnore
 	public String getRoleNames() {
 		return Collections3.extractToString(roleList, "name", ", ");
 	}

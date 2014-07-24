@@ -15,21 +15,29 @@
 			<id property="id" column="user_id" />
 			<result property="name" column="user_name" />
 			<result property="email" column="user_email" />
+			<collection property="roleList" javaType="Role">
+				<id property="id" column="role_id" />
+			</collection>
 		</collection>
 	</resultMap>
 
 	<!-- 获取部门详细信息, 输出用resultMap关联嵌套对象 -->
 	<select id="getWithDetail" parameterType="int" resultMap="teamDetailMap">
-		select t.id as team_id,
-		t.name as team_name,
-		m.id as master_id,
-		m.name as master_name,
-		m.email as master_email,
-		u.id as user_id,
-		u.name as user_name,
-		u.email as user_email
-		from ss_team t, ss_user m, ss_user u
-		where t.master_id=m.id and t.id=u.team_id
-		and t.id=#{id}
+		select 
+			t.id as team_id,
+			t.name as team_name,
+			m.id as master_id,
+			m.name as master_name,
+			m.email as master_email,
+			u.id as user_id,
+			u.name as user_name,
+			u.email as user_email,
+			r.role_id as role_id
+		from 
+			ss_team t, ss_user m, ss_user u, ss_user_role r
+		where 
+			t.master_id=m.id and t.id=u.team_id
+			and r.user_id = u.id
+			and t.id=#{id}
 	</select>
 </mapper> 
